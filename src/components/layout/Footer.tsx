@@ -30,7 +30,7 @@ export function Footer({ dict, locale }: FooterProps) {
       <Container>
         <div className="grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-1">
-            <Link href={`/${locale}`} className="inline-flex items-center gap-2 text-xl font-semibold text-white">
+            <Link href={`/${locale}`} className="inline-flex items-center gap-2 text-white">
               <Image
                 src="/images/ck_logo.png"
                 alt="CloudKeeping logo"
@@ -38,7 +38,9 @@ export function Footer({ dict, locale }: FooterProps) {
                 height={30}
                 className="h-[30px] w-[30px] object-contain brightness-0 invert"
               />
-              {SITE_NAME}
+              <span className="text-xl font-bold tracking-tight" style={{ fontFamily: "var(--font-logo)" }}>
+                {SITE_NAME}
+              </span>
             </Link>
             <p className="mt-4 text-sm leading-relaxed text-white/50">{dict.footer.description}</p>
           </div>

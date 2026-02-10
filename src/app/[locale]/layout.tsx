@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Lexend_Mega } from "next/font/google";
 import { notFound } from "next/navigation";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -9,9 +9,11 @@ import { isValidLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
 import { SITE_URL, SITE_NAME } from "@/lib/constants";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const lexendMega = Lexend_Mega({
+  variable: "--font-lexend-mega",
   subsets: ["latin"],
+  weight: ["200", "400", "700", "900"],
+  display: "swap",
 });
 
 interface Props {
@@ -80,7 +82,7 @@ export default async function LocaleLayout({ children, params }: Props) {
       <head>
         <SchemaOrg />
       </head>
-      <body className={`${geistSans.variable} font-sans antialiased`}>
+      <body className={`${lexendMega.variable} font-sans antialiased`}>
         <GoogleAnalytics />
         <a href="#main-content" className="skip-to-content">
           Skip to main content

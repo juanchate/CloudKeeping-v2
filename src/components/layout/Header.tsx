@@ -54,7 +54,7 @@ export function Header({ dict, locale }: HeaderProps) {
           {/* Logo */}
           <Link
             href={`/${locale}`}
-            className="flex items-center gap-2 text-xl font-semibold text-primary transition-colors hover:text-primary-light"
+            className="flex items-center gap-2 text-primary transition-colors hover:text-primary-light"
           >
             <Image
               src="/images/ck_logo.png"
@@ -64,7 +64,9 @@ export function Header({ dict, locale }: HeaderProps) {
               className="h-[34px] w-[34px] object-contain"
               priority
             />
-            {SITE_NAME}
+            <span className="text-xl font-bold tracking-tight" style={{ fontFamily: "var(--font-logo)" }}>
+              {SITE_NAME}
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
