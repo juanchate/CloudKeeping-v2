@@ -53,16 +53,8 @@ export function Header({ dict, locale }: HeaderProps) {
           {/* Logo */}
           <Link
             href={`/${locale}`}
-            className="flex items-center gap-2.5 text-primary transition-colors hover:text-primary-light"
+            className="text-primary transition-colors hover:text-primary-light"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/images/ck_logo.png"
-              alt="CloudKeeping logo"
-              width={40}
-              height={40}
-              className="h-10 w-10 object-contain"
-            />
             <span className="text-[22px] font-black tracking-tight" style={{ fontFamily: "var(--font-logo)" }}>
               {SITE_NAME}
             </span>

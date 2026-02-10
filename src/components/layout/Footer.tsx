@@ -29,15 +29,7 @@ export function Footer({ dict, locale }: FooterProps) {
       <Container>
         <div className="grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-1">
-            <Link href={`/${locale}`} className="inline-flex items-center gap-2.5 text-white">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/images/ck_logo.png"
-                alt="CloudKeeping logo"
-                width={34}
-                height={34}
-                className="h-[34px] w-[34px] object-contain brightness-0 invert"
-              />
+            <Link href={`/${locale}`} className="text-white">
               <span className="text-[22px] font-black tracking-tight" style={{ fontFamily: "var(--font-logo)" }}>
                 {SITE_NAME}
               </span>
