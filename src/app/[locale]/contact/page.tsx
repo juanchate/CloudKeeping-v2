@@ -6,6 +6,7 @@ import { CONTACT } from "@/lib/constants";
 import { Phone, Mail, Clock, MapPin } from "lucide-react";
 import { isValidLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
+import { createPageMetadata } from "@/lib/seo";
 
 interface Props { params: Promise<{ locale: string }> }
 
@@ -13,7 +14,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   if (!isValidLocale(locale)) return {};
   const d = getDictionary(locale as Locale);
-  return { title: d.contact.pageTitle, description: d.contact.pageSubtitle };
+  return createPageMetadata({
+    locale: locale as Locale,
+    path: "/contact",
+    title: d.contact.pageTitle,
+    description: d.contact.pageSubtitle,
+  });
 }
 
 function InfoItem({ icon: Ic, label, children }: { icon: React.ElementType; label: string; children: React.ReactNode }) {

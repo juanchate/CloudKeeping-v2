@@ -5,6 +5,8 @@ import { Accordion } from "@/components/ui/Accordion";
 import { LinkButton } from "@/components/ui/LinkButton";
 import { isValidLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
+import { createPageMetadata } from "@/lib/seo";
+import { SITE_URL } from "@/lib/constants";
 
 interface Props { params: Promise<{ locale: string }> }
 
@@ -12,7 +14,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   if (!isValidLocale(locale)) return {};
   const d = getDictionary(locale as Locale);
-  return { title: d.faq.pageTitle, description: d.faq.pageSubtitle };
+  return createPageMetadata({
+    locale: locale as Locale,
+    path: "/faq",
+    title: d.faq.pageTitle,
+    description: d.faq.pageSubtitle,
+  });
 }
 
 export default async function FAQPage({ params }: Props) {
@@ -24,8 +31,25 @@ export default async function FAQPage({ params }: Props) {
   const categories = [...new Set(f.items.map((q) => q.category))];
   const grouped = categories.map((cat) => ({ category: cat, items: f.items.filter((q) => q.category === cat) }));
 
+  // FAQPage structured data
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    inLanguage: locale,
+    mainEntity: f.items.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+
       <section className="bg-gradient-to-b from-surface to-white py-16 lg:py-20">
         <Container><div className="mx-auto max-w-2xl text-center">
           <h1 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">{f.pageTitle}</h1>

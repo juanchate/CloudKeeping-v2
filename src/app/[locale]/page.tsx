@@ -1,5 +1,7 @@
+import type { Metadata } from "next";
 import { isValidLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
+import { createPageMetadata } from "@/lib/seo";
 import { notFound } from "next/navigation";
 import { Hero } from "@/components/sections/Hero";
 import { ServicesOverview } from "@/components/sections/ServicesOverview";
@@ -11,6 +13,18 @@ import { FAQPreview } from "@/components/sections/FAQPreview";
 import { CTAStrip } from "@/components/sections/CTAStrip";
 
 interface Props { params: Promise<{ locale: string }> }
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  if (!isValidLocale(locale)) return {};
+  const d = getDictionary(locale as Locale);
+  return createPageMetadata({
+    locale: locale as Locale,
+    path: "",
+    title: d.metadata.title,
+    description: d.metadata.description,
+  });
+}
 
 export default async function HomePage({ params }: Props) {
   const { locale } = await params;

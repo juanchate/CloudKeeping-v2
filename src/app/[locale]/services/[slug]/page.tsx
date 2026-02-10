@@ -9,7 +9,8 @@ import { LinkButton } from "@/components/ui/LinkButton";
 import { CTAStrip } from "@/components/sections/CTAStrip";
 import { isValidLocale, locales, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
-import { SITE_NAME } from "@/lib/constants";
+import { createPageMetadata } from "@/lib/seo";
+import { SITE_URL, SITE_NAME } from "@/lib/constants";
 import { Check } from "lucide-react";
 
 interface Props { params: Promise<{ locale: string; slug: string }> }
@@ -27,7 +28,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const d = getDictionary(locale as Locale);
   const service = d.services.find((s) => s.slug === slug);
   if (!service) return {};
-  return { title: `${service.title}`, description: service.shortDescription, openGraph: { title: `${service.title} | ${SITE_NAME}`, description: service.shortDescription } };
+
+  const meta = createPageMetadata({
+    locale: locale as Locale,
+    path: `/services/${slug}`,
+    title: service.title,
+    description: service.shortDescription,
+  });
+
+  return {
+    ...meta,
+    openGraph: {
+      ...meta.openGraph,
+      title: `${service.title} | ${SITE_NAME}`,
+    },
+  };
 }
 
 export default async function ServiceDetailPage({ params }: Props) {
@@ -39,8 +54,38 @@ export default async function ServiceDetailPage({ params }: Props) {
   if (!service) notFound();
   const related = d.services.filter((s) => s.slug !== slug);
 
+  // Service structured data
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: service.title,
+    description: service.description,
+    provider: {
+      "@type": "ProfessionalService",
+      name: SITE_NAME,
+      url: SITE_URL,
+    },
+    areaServed: { "@type": "State", name: "British Columbia" },
+    url: `${SITE_URL}/${locale}/services/${slug}`,
+    inLanguage: locale,
+  };
+
+  // Breadcrumb structured data
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: d.nav.home, item: `${SITE_URL}/${locale}` },
+      { "@type": "ListItem", position: 2, name: d.nav.services, item: `${SITE_URL}/${locale}/services` },
+      { "@type": "ListItem", position: 3, name: service.title, item: `${SITE_URL}/${locale}/services/${slug}` },
+    ],
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+
       <section className="bg-gradient-to-b from-surface to-white py-12 lg:py-16">
         <Container>
           <Breadcrumb items={[{ label: d.nav.home, href: `/${locale}` }, { label: d.nav.services, href: `/${locale}/services` }, { label: service.title }]} />

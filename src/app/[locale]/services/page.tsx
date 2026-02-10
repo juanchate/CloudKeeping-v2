@@ -7,6 +7,7 @@ import { Icon, type IconName } from "@/components/ui/Icon";
 import { CTAStrip } from "@/components/sections/CTAStrip";
 import { isValidLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
+import { createPageMetadata } from "@/lib/seo";
 import { ArrowRight, Check } from "lucide-react";
 
 interface Props { params: Promise<{ locale: string }> }
@@ -15,7 +16,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   if (!isValidLocale(locale)) return {};
   const d = getDictionary(locale as Locale);
-  return { title: d.servicesPage.pageTitle, description: d.servicesPage.pageSubtitle };
+  return createPageMetadata({
+    locale: locale as Locale,
+    path: "/services",
+    title: d.servicesPage.pageTitle,
+    description: d.servicesPage.pageSubtitle,
+  });
 }
 
 export default async function ServicesPage({ params }: Props) {

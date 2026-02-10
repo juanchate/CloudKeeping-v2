@@ -2,21 +2,33 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { LEGAL_NAME, CONTACT, SITE_NAME } from "@/lib/constants";
-import { isValidLocale } from "@/lib/i18n";
+import { isValidLocale, type Locale } from "@/lib/i18n";
+import { createPageMetadata } from "@/lib/seo";
 
 interface Props { params: Promise<{ locale: string }> }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
+  if (!isValidLocale(locale)) return {};
   const title = locale === "es" ? "Pol\u00edtica de Privacidad" : "Privacy Policy";
-  return { title, description: `${title} for ${SITE_NAME}.` };
+  const description = locale === "es"
+    ? `Pol\u00edtica de privacidad de ${SITE_NAME}. C\u00f3mo recopilamos, usamos y protegemos tu informaci\u00f3n.`
+    : `Privacy Policy for ${SITE_NAME}. How we collect, use, and protect your information.`;
+  return {
+    ...createPageMetadata({
+      locale: locale as Locale,
+      path: "/privacy",
+      title,
+      description,
+    }),
+    robots: { index: true, follow: true },
+  };
 }
 
 export default async function PrivacyPage({ params }: Props) {
   const { locale } = await params;
   if (!isValidLocale(locale)) notFound();
 
-  // Privacy policy is kept in English for legal accuracy, with a Spanish notice at the top for ES users.
   return (
     <section className="py-16 lg:py-20">
       <Container>

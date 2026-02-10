@@ -25,7 +25,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   if (!isValidLocale(locale)) return {};
   const dict = getDictionary(locale);
-  const otherLocale = locale === "en" ? "es" : "en";
 
   return {
     title: {
@@ -41,28 +40,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       apple: "/apple-touch-icon.png",
     },
     manifest: "/site.webmanifest",
-    alternates: {
-      canonical: `${SITE_URL}/${locale}`,
-      languages: {
-        en: `${SITE_URL}/en`,
-        es: `${SITE_URL}/es`,
-        "x-default": `${SITE_URL}/en`,
-      },
-    },
-    openGraph: {
-      type: "website",
-      locale: locale === "es" ? "es_ES" : "en_CA",
-      alternateLocale: otherLocale === "es" ? "es_ES" : "en_CA",
-      url: `${SITE_URL}/${locale}`,
-      siteName: SITE_NAME,
-      title: dict.metadata.title,
-      description: dict.metadata.description,
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: dict.metadata.title,
-      description: dict.metadata.description,
-    },
     robots: { index: true, follow: true },
   };
 }
@@ -80,7 +57,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   return (
     <html lang={locale} className="scroll-smooth">
       <head>
-        <SchemaOrg />
+        <SchemaOrg locale={locale} />
       </head>
       <body className={`${lexendMega.variable} font-sans antialiased`}>
         <GoogleAnalytics />

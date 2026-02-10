@@ -6,6 +6,7 @@ import { Card, CardTitle, CardDescription } from "@/components/ui/Card";
 import { CTAStrip } from "@/components/sections/CTAStrip";
 import { isValidLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
+import { createPageMetadata } from "@/lib/seo";
 import { Target, Shield, Eye, Headphones } from "lucide-react";
 
 interface Props { params: Promise<{ locale: string }> }
@@ -14,7 +15,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   if (!isValidLocale(locale)) return {};
   const d = getDictionary(locale as Locale);
-  return { title: d.about.pageTitle, description: d.about.pageSubtitle };
+  return createPageMetadata({
+    locale: locale as Locale,
+    path: "/about",
+    title: d.about.pageTitle,
+    description: d.about.pageSubtitle,
+  });
 }
 
 const valueIcons = [Target, Shield, Eye, Headphones];
