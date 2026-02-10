@@ -10,6 +10,14 @@ function getPreferredLocale(request: NextRequest): string {
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // Skip static files and assets
+  if (
+    pathname.includes(".") || // any file with extension (images, fonts, etc.)
+    pathname.startsWith("/api")
+  ) {
+    return;
+  }
+
   // Check if pathname already has a locale prefix
   const hasLocale = locales.some(
     (loc) => pathname.startsWith(`/${loc}/`) || pathname === `/${loc}`
@@ -24,6 +32,6 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)",
+    "/((?!_next/static|_next/image).*)",
   ],
 };
