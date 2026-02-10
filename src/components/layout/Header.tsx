@@ -47,7 +47,7 @@ export function Header({ dict, locale }: HeaderProps) {
     >
       <Container>
         <nav
-          className="flex h-16 items-center justify-between lg:h-[72px]"
+          className="relative flex h-16 items-center justify-between lg:h-[72px]"
           aria-label="Main navigation"
         >
           {/* Logo */}
@@ -60,8 +60,8 @@ export function Header({ dict, locale }: HeaderProps) {
             </span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex lg:items-center lg:gap-1">
+          {/* Desktop Navigation — absolutely centered */}
+          <div className="hidden lg:flex lg:items-center lg:gap-1 lg:absolute lg:left-1/2 lg:-translate-x-1/2">
             {navItems.map((item) => (
               <Link
                 key={item.href}
