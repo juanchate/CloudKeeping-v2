@@ -7,7 +7,7 @@ interface SchemaOrgProps {
 export function SchemaOrg({ locale = "en" }: SchemaOrgProps) {
   const description =
     locale === "es"
-      ? "Servicios profesionales de contabilidad, teneduría de libros, planificación fiscal y nómina para pequeñas y medianas empresas en Columbia Británica, Canadá."
+      ? "Servicios profesionales de contabilidad, teneduría de libros, planificación fiscal y nómina para pequeñas y medianas empresas en British Columbia, Canadá."
       : "Professional accounting, bookkeeping, tax planning, and payroll services for small and medium-sized businesses in British Columbia, Canada.";
 
   const schema = {
