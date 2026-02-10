@@ -14,10 +14,7 @@ export function SchemaOrg() {
     areaServed: {
       "@type": "State",
       name: "British Columbia",
-      containedInPlace: {
-        "@type": "Country",
-        name: "Canada",
-      },
+      containedInPlace: { "@type": "Country", name: "Canada" },
     },
     openingHoursSpecification: {
       "@type": "OpeningHoursSpecification",

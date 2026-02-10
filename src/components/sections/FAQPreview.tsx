@@ -2,31 +2,20 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Accordion } from "@/components/ui/Accordion";
 import { LinkButton } from "@/components/ui/LinkButton";
-import { faqs } from "@/lib/content";
+import type { Dictionary } from "@/lib/dictionaries";
 
-export function FAQPreview() {
-  const previewFaqs = faqs.slice(0, 4);
+interface Props { content: Dictionary["faq"]; locale: string }
 
+export function FAQPreview({ content, locale }: Props) {
+  const previewFaqs = content.items.slice(0, 4);
   return (
     <section className="bg-surface py-24 lg:py-28">
       <Container>
-        <SectionHeading
-          title="Frequently Asked Questions"
-          subtitle="Quick answers to the questions we hear most often."
-        />
-
+        <SectionHeading title={content.previewHeading} subtitle={content.previewSubheading} />
         <div className="mx-auto max-w-3xl">
           <Accordion items={previewFaqs} />
-
           <div className="mt-12 text-center">
-            <LinkButton
-              href="/faq"
-              variant="outline"
-              size="md"
-              trackLabel="FAQ Preview - See All FAQs"
-            >
-              See All FAQs
-            </LinkButton>
+            <LinkButton href={`/${locale}/faq`} variant="outline" size="md" trackLabel="FAQ Preview - See All FAQs">{content.seeAll}</LinkButton>
           </div>
         </div>
       </Container>

@@ -85,7 +85,7 @@ export async function POST(request: Request) {
     // Send email via Resend
     const resendApiKey = process.env.RESEND_API_KEY;
     const contactEmail =
-      process.env.CONTACT_EMAIL || "info@cloudkeeping.info";
+      process.env.CONTACT_EMAIL || "info@cloudkeeping.cpa";
 
     if (!resendApiKey) {
       console.error("RESEND_API_KEY is not configured");
