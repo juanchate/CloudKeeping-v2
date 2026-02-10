@@ -9,7 +9,7 @@ export const CONTACT = {
   phoneRaw: "+16047293421",
   email: "info@cloudkeeping.info",
   emailSubject: "Inquiry from CloudKeeping Website",
-  hours: "Monday – Friday, 9:00 AM – 5:00 PM PST",
+  hours: "Monday – Friday, 9:00 AM – 4:00 PM PST",
   serviceArea: "British Columbia, Canada",
   timezone: "Pacific Standard Time (PST)",
 } as const;

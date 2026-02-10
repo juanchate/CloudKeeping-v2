@@ -21,7 +21,7 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
       {/* Overlay */}
       {isOpen && (
         <div
-          className="fixed inset-0 z-40 bg-black/20 backdrop-blur-sm lg:hidden"
+          className="fixed inset-0 z-40 bg-black/10 backdrop-blur-sm lg:hidden"
           onClick={onClose}
           aria-hidden="true"
         />
@@ -30,7 +30,7 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
       {/* Panel */}
       <div
         className={cn(
-          "fixed inset-y-0 right-0 z-50 w-full max-w-sm bg-white shadow-xl transition-transform duration-300 ease-in-out lg:hidden",
+          "fixed inset-y-0 right-0 z-50 w-full max-w-sm bg-white shadow-2xl transition-transform duration-300 ease-in-out lg:hidden",
           isOpen ? "translate-x-0" : "translate-x-full"
         )}
         role="dialog"
@@ -43,19 +43,19 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
             onClick={onClose}
             aria-label="Close navigation menu"
           >
-            <X className="h-6 w-6" />
+            <X className="h-5 w-5" />
           </button>
         </div>
 
-        <nav className="flex flex-col gap-1 px-4">
+        <nav className="flex flex-col gap-0.5 px-4">
           {NAV_ITEMS.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               className={cn(
-                "rounded-lg px-4 py-3 text-base font-medium transition-colors",
+                "rounded-xl px-4 py-3 text-[15px] font-medium transition-colors",
                 pathname === item.href
-                  ? "text-primary bg-surface-alt"
+                  ? "text-foreground bg-surface-alt"
                   : "text-muted hover:text-foreground hover:bg-surface"
               )}
               onClick={onClose}
@@ -64,7 +64,7 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
             </Link>
           ))}
 
-          <div className="mt-6 flex flex-col gap-3 border-t border-border pt-6">
+          <div className="mt-8 flex flex-col gap-3 border-t border-border/50 pt-8">
             <LinkButton
               href="/contact"
               variant="primary"
@@ -77,7 +77,7 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
 
             <a
               href={`tel:${CONTACT.phoneRaw}`}
-              className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-primary px-6 py-3 text-base font-semibold text-primary transition-colors hover:bg-primary hover:text-white"
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-border px-6 py-3 text-sm font-medium text-foreground transition-colors hover:border-accent hover:text-accent"
               onClick={() => trackPhoneClick()}
             >
               <Phone className="h-4 w-4" />

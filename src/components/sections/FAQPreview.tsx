@@ -5,11 +5,10 @@ import { LinkButton } from "@/components/ui/LinkButton";
 import { faqs } from "@/lib/content";
 
 export function FAQPreview() {
-  // Show first 4 FAQs on homepage
   const previewFaqs = faqs.slice(0, 4);
 
   return (
-    <section className="bg-surface py-20 lg:py-24">
+    <section className="bg-surface py-24 lg:py-28">
       <Container>
         <SectionHeading
           title="Frequently Asked Questions"
@@ -19,7 +18,7 @@ export function FAQPreview() {
         <div className="mx-auto max-w-3xl">
           <Accordion items={previewFaqs} />
 
-          <div className="mt-10 text-center">
+          <div className="mt-12 text-center">
             <LinkButton
               href="/faq"
               variant="outline"

@@ -14,6 +14,7 @@ export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
@@ -25,25 +26,25 @@ export function Header() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 w-full transition-all duration-200",
+        "sticky top-0 z-50 w-full transition-all duration-300",
         isScrolled
-          ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-border"
+          ? "bg-white/95 backdrop-blur-md shadow-[0_1px_3px_rgba(0,0,0,0.04)] border-b border-border/40"
           : "bg-white"
       )}
     >
       <Container>
         <nav
-          className="flex h-16 items-center justify-between lg:h-20"
+          className="flex h-16 items-center justify-between lg:h-[72px]"
           aria-label="Main navigation"
         >
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-2 text-xl font-bold text-primary transition-colors hover:text-primary-light"
+            className="flex items-center gap-2.5 text-xl font-semibold text-primary transition-colors hover:text-primary-light"
           >
             <svg
-              width="32"
-              height="32"
+              width="30"
+              height="30"
               viewBox="0 0 32 32"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -57,17 +58,17 @@ export function Header() {
               />
               <path
                 d="M10 16C10 12.6863 12.6863 10 16 10C17.5913 10 19.0174 10.6321 20.0711 11.6569"
-                stroke="white"
+                stroke="#C8922A"
                 strokeWidth="2.5"
                 strokeLinecap="round"
               />
               <path
                 d="M22 16C22 19.3137 19.3137 22 16 22C14.4087 22 12.9826 21.3679 11.9289 20.3431"
-                stroke="white"
+                stroke="#C8922A"
                 strokeWidth="2.5"
                 strokeLinecap="round"
               />
-              <circle cx="16" cy="16" r="2" fill="white" />
+              <circle cx="16" cy="16" r="2" fill="#C8922A" />
             </svg>
             {SITE_NAME}
           </Link>
@@ -82,7 +83,7 @@ export function Header() {
                   className={cn(
                     "rounded-lg px-4 py-2 text-sm font-medium transition-colors",
                     pathname === item.href
-                      ? "text-primary bg-surface-alt"
+                      ? "text-foreground bg-surface-alt"
                       : "text-muted hover:text-foreground hover:bg-surface"
                   )}
                 >

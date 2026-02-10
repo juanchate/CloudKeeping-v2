@@ -6,11 +6,11 @@ export default function NotFound() {
     <section className="py-32 lg:py-40">
       <Container>
         <div className="mx-auto max-w-md text-center">
-          <p className="text-7xl font-bold text-primary/20">404</p>
-          <h1 className="mt-4 text-3xl font-bold text-foreground">
+          <p className="text-7xl font-semibold text-accent/20">404</p>
+          <h1 className="mt-4 text-3xl font-semibold tracking-tight text-foreground">
             Page Not Found
           </h1>
-          <p className="mt-4 text-muted leading-relaxed">
+          <p className="mt-4 text-muted leading-relaxed text-sm">
             The page you&apos;re looking for doesn&apos;t exist or has been
             moved. Let&apos;s get you back on track.
           </p>

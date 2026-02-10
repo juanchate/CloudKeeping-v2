@@ -20,7 +20,7 @@ export default function ServicesPage() {
       <section className="bg-gradient-to-b from-surface to-white py-16 lg:py-20">
         <Container>
           <div className="mx-auto max-w-2xl text-center">
-            <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+            <h1 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
               Our Services
             </h1>
             <p className="mt-4 text-lg text-muted leading-relaxed">
@@ -33,7 +33,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Services Grid */}
-      <section className="py-20 lg:py-24">
+      <section className="py-24 lg:py-28">
         <Container>
           <div className="grid gap-8 lg:grid-cols-2">
             {services.map((service) => (
@@ -42,38 +42,37 @@ export default function ServicesPage() {
                 href={`/services/${service.slug}`}
                 className="group"
               >
-                <Card hover className="h-full p-8 transition-all group-hover:border-accent/30">
-                  <div className="flex items-start gap-4">
-                    <div className="shrink-0 inline-flex h-14 w-14 items-center justify-center rounded-xl bg-accent/10 text-accent transition-colors group-hover:bg-accent group-hover:text-white">
+                <Card hover className="h-full p-8 transition-all group-hover:border-accent/25">
+                  <div className="flex items-start gap-5">
+                    <div className="shrink-0 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-accent/8 text-accent transition-colors group-hover:bg-accent group-hover:text-white">
                       <Icon
                         name={service.icon as IconName}
-                        className="h-7 w-7"
+                        className="h-6 w-6"
                       />
                     </div>
                     <div className="flex-1">
-                      <h2 className="text-xl font-semibold text-foreground mb-2">
+                      <h2 className="text-xl font-semibold tracking-tight text-foreground mb-2">
                         {service.title}
                       </h2>
-                      <p className="text-muted leading-relaxed mb-4">
+                      <p className="text-muted leading-relaxed mb-4 text-sm">
                         {service.shortDescription}
                       </p>
 
-                      {/* Key items */}
-                      <ul className="space-y-2 mb-4">
+                      <ul className="space-y-2 mb-5">
                         {service.included.slice(0, 3).map((item) => (
                           <li
                             key={item}
                             className="flex items-start gap-2 text-sm text-muted"
                           >
-                            <Check className="h-4 w-4 mt-0.5 shrink-0 text-accent" />
+                            <Check className="h-3.5 w-3.5 mt-0.5 shrink-0 text-accent" />
                             {item}
                           </li>
                         ))}
                       </ul>
 
-                      <span className="inline-flex items-center gap-1 text-sm font-medium text-accent transition-colors group-hover:text-accent-dark">
+                      <span className="inline-flex items-center gap-1.5 text-sm font-medium text-accent transition-colors group-hover:text-accent-dark">
                         Learn more
-                        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                        <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
                       </span>
                     </div>
                   </div>

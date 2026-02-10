@@ -8,7 +8,7 @@ import { ArrowRight } from "lucide-react";
 
 export function ServicesOverview() {
   return (
-    <section className="py-20 lg:py-24">
+    <section className="py-24 lg:py-28">
       <Container>
         <SectionHeading
           title="Our Services"
@@ -22,12 +22,12 @@ export function ServicesOverview() {
               href={`/services/${service.slug}`}
               className="group"
             >
-              <Card hover className="h-full transition-all group-hover:border-accent/30">
+              <Card hover className="h-full transition-all group-hover:border-accent/25">
                 <CardHeader>
-                  <div className="mb-3 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-accent/10 text-accent transition-colors group-hover:bg-accent group-hover:text-white">
+                  <div className="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-accent/8 text-accent transition-colors group-hover:bg-accent group-hover:text-white">
                     <Icon
                       name={service.icon as IconName}
-                      className="h-6 w-6"
+                      className="h-5 w-5"
                     />
                   </div>
                   <CardTitle>{service.title}</CardTitle>
@@ -35,7 +35,7 @@ export function ServicesOverview() {
                 <CardDescription>{service.shortDescription}</CardDescription>
                 <div className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-accent transition-colors group-hover:text-accent-dark">
                   Learn more
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
                 </div>
               </Card>
             </Link>

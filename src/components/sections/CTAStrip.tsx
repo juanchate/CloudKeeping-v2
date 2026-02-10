@@ -15,14 +15,17 @@ export function CTAStrip({
   ctaHref = "/contact",
 }: CTAStripProps) {
   return (
-    <section className="bg-primary py-16 lg:py-20">
+    <section className="relative bg-primary py-20 lg:py-24">
+      {/* Gold accent line at top */}
+      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-accent to-transparent opacity-40" />
+
       <Container>
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+          <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
             {title}
           </h2>
-          <p className="mt-4 text-lg text-white/70">{subtitle}</p>
-          <div className="mt-8">
+          <p className="mt-4 text-lg text-white/50 leading-relaxed">{subtitle}</p>
+          <div className="mt-10">
             <LinkButton
               href={ctaHref}
               variant="primary"

@@ -9,6 +9,9 @@ import { trackFormSubmit } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 import { CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
 
+const inputStyles =
+  "w-full rounded-xl border bg-white px-4 py-3 text-sm text-foreground placeholder:text-muted/40 transition-all duration-200 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/15";
+
 export function ContactForm() {
   const [submitStatus, setSubmitStatus] = useState<
     "idle" | "loading" | "success" | "error"
@@ -53,18 +56,18 @@ export function ContactForm() {
 
   if (submitStatus === "success") {
     return (
-      <div className="rounded-xl border border-green-200 bg-green-50 p-8 text-center">
-        <CheckCircle2 className="mx-auto mb-4 h-12 w-12 text-success" />
+      <div className="rounded-2xl border border-green-200/60 bg-green-50/50 p-10 text-center">
+        <CheckCircle2 className="mx-auto mb-4 h-10 w-10 text-success" />
         <h3 className="text-xl font-semibold text-foreground mb-2">
-          Thank You!
+          Thank You
         </h3>
-        <p className="text-muted">
+        <p className="text-muted text-sm leading-relaxed">
           Your message has been sent successfully. We typically respond within
           one business day.
         </p>
         <button
           onClick={() => setSubmitStatus("idle")}
-          className="mt-4 text-sm font-medium text-accent hover:text-accent-dark transition-colors"
+          className="mt-6 text-sm font-medium text-accent hover:text-accent-dark transition-colors"
         >
           Send another message
         </button>
@@ -73,7 +76,7 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-6">
+    <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5">
       {/* Honeypot - hidden from real users */}
       <div className="absolute -left-[9999px]" aria-hidden="true">
         <label htmlFor="honeypot">Leave this field empty</label>
@@ -90,24 +93,24 @@ export function ContactForm() {
       <div>
         <label
           htmlFor="name"
-          className="block text-sm font-medium text-foreground mb-1.5"
+          className="block text-sm font-medium text-foreground mb-2"
         >
-          Name <span className="text-error">*</span>
+          Name <span className="text-accent">*</span>
         </label>
         <input
           id="name"
           type="text"
           autoComplete="name"
           className={cn(
-            "w-full rounded-lg border bg-white px-4 py-3 text-sm text-foreground placeholder:text-muted/60 transition-colors focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20",
-            errors.name ? "border-error" : "border-border"
+            inputStyles,
+            errors.name ? "border-error" : "border-border/60"
           )}
           placeholder="Your full name"
           aria-describedby={errors.name ? "name-error" : undefined}
           {...register("name")}
         />
         {errors.name && (
-          <p id="name-error" className="mt-1.5 text-sm text-error" role="alert">
+          <p id="name-error" className="mt-1.5 text-xs text-error" role="alert">
             {errors.name.message}
           </p>
         )}
@@ -117,17 +120,17 @@ export function ContactForm() {
       <div>
         <label
           htmlFor="email"
-          className="block text-sm font-medium text-foreground mb-1.5"
+          className="block text-sm font-medium text-foreground mb-2"
         >
-          Email <span className="text-error">*</span>
+          Email <span className="text-accent">*</span>
         </label>
         <input
           id="email"
           type="email"
           autoComplete="email"
           className={cn(
-            "w-full rounded-lg border bg-white px-4 py-3 text-sm text-foreground placeholder:text-muted/60 transition-colors focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20",
-            errors.email ? "border-error" : "border-border"
+            inputStyles,
+            errors.email ? "border-error" : "border-border/60"
           )}
           placeholder="you@company.com"
           aria-describedby={errors.email ? "email-error" : undefined}
@@ -136,7 +139,7 @@ export function ContactForm() {
         {errors.email && (
           <p
             id="email-error"
-            className="mt-1.5 text-sm text-error"
+            className="mt-1.5 text-xs text-error"
             role="alert"
           >
             {errors.email.message}
@@ -148,17 +151,17 @@ export function ContactForm() {
       <div>
         <label
           htmlFor="phone"
-          className="block text-sm font-medium text-foreground mb-1.5"
+          className="block text-sm font-medium text-foreground mb-2"
         >
-          Phone <span className="text-muted text-xs">(optional)</span>
+          Phone <span className="text-muted text-xs font-normal">(optional)</span>
         </label>
         <input
           id="phone"
           type="tel"
           autoComplete="tel"
           className={cn(
-            "w-full rounded-lg border bg-white px-4 py-3 text-sm text-foreground placeholder:text-muted/60 transition-colors focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20",
-            errors.phone ? "border-error" : "border-border"
+            inputStyles,
+            errors.phone ? "border-error" : "border-border/60"
           )}
           placeholder="+1 (604) 000-0000"
           aria-describedby={errors.phone ? "phone-error" : undefined}
@@ -167,7 +170,7 @@ export function ContactForm() {
         {errors.phone && (
           <p
             id="phone-error"
-            className="mt-1.5 text-sm text-error"
+            className="mt-1.5 text-xs text-error"
             role="alert"
           >
             {errors.phone.message}
@@ -179,16 +182,17 @@ export function ContactForm() {
       <div>
         <label
           htmlFor="message"
-          className="block text-sm font-medium text-foreground mb-1.5"
+          className="block text-sm font-medium text-foreground mb-2"
         >
-          Message <span className="text-error">*</span>
+          Message <span className="text-accent">*</span>
         </label>
         <textarea
           id="message"
           rows={5}
           className={cn(
-            "w-full rounded-lg border bg-white px-4 py-3 text-sm text-foreground placeholder:text-muted/60 transition-colors focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 resize-y",
-            errors.message ? "border-error" : "border-border"
+            inputStyles,
+            "resize-y",
+            errors.message ? "border-error" : "border-border/60"
           )}
           placeholder="Tell us about your business and how we can help..."
           aria-describedby={errors.message ? "message-error" : undefined}
@@ -197,7 +201,7 @@ export function ContactForm() {
         {errors.message && (
           <p
             id="message-error"
-            className="mt-1.5 text-sm text-error"
+            className="mt-1.5 text-xs text-error"
             role="alert"
           >
             {errors.message.message}
@@ -208,7 +212,7 @@ export function ContactForm() {
       {/* Error Banner */}
       {submitStatus === "error" && (
         <div
-          className="flex items-start gap-3 rounded-lg border border-red-200 bg-red-50 p-4"
+          className="flex items-start gap-3 rounded-xl border border-red-200/60 bg-red-50/50 p-4"
           role="alert"
           aria-live="polite"
         >

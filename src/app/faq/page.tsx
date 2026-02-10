@@ -24,7 +24,7 @@ export default function FAQPage() {
       <section className="bg-gradient-to-b from-surface to-white py-16 lg:py-20">
         <Container>
           <div className="mx-auto max-w-2xl text-center">
-            <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+            <h1 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
               Frequently Asked Questions
             </h1>
             <p className="mt-4 text-lg text-muted leading-relaxed">
@@ -36,12 +36,12 @@ export default function FAQPage() {
       </section>
 
       {/* FAQs */}
-      <section className="py-20 lg:py-24">
+      <section className="py-24 lg:py-28">
         <Container>
           <div className="mx-auto max-w-3xl">
             {groupedFaqs.map((group) => (
-              <div key={group.category} className="mb-12 last:mb-0">
-                <h2 className="mb-6 text-xl font-semibold text-foreground">
+              <div key={group.category} className="mb-14 last:mb-0">
+                <h2 className="mb-6 text-lg font-semibold tracking-tight text-foreground">
                   {group.category}
                 </h2>
                 <Accordion items={group.items} />
@@ -52,13 +52,13 @@ export default function FAQPage() {
       </section>
 
       {/* Bottom CTA */}
-      <section className="bg-surface py-16 lg:py-20">
+      <section className="bg-surface py-20 lg:py-24">
         <Container>
           <div className="mx-auto max-w-xl text-center">
-            <h2 className="text-2xl font-bold text-foreground mb-4">
+            <h2 className="text-2xl font-semibold tracking-tight text-foreground mb-4">
               Still Have Questions?
             </h2>
-            <p className="text-muted mb-8">
+            <p className="text-muted mb-8 text-sm leading-relaxed">
               We&apos;re happy to help. Reach out and we&apos;ll get back to you
               within one business day.
             </p>

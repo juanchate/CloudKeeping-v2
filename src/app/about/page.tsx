@@ -21,7 +21,7 @@ export default function AboutPage() {
       <section className="bg-gradient-to-b from-surface to-white py-16 lg:py-20">
         <Container>
           <div className="mx-auto max-w-2xl text-center">
-            <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+            <h1 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
               About CloudKeeping
             </h1>
             <p className="mt-4 text-lg text-muted leading-relaxed">
@@ -33,10 +33,10 @@ export default function AboutPage() {
       </section>
 
       {/* Story */}
-      <section className="py-20 lg:py-24">
+      <section className="py-24 lg:py-28">
         <Container>
           <div className="mx-auto max-w-3xl">
-            <h2 className="text-2xl font-bold text-foreground mb-6">
+            <h2 className="text-2xl font-semibold tracking-tight text-foreground mb-6">
               Our Story
             </h2>
             <div className="space-y-4 text-muted leading-relaxed">
@@ -48,7 +48,7 @@ export default function AboutPage() {
       </section>
 
       {/* Values */}
-      <section className="bg-surface py-20 lg:py-24">
+      <section className="bg-surface py-24 lg:py-28">
         <Container>
           <SectionHeading
             title="Our Values"
@@ -60,8 +60,8 @@ export default function AboutPage() {
               const IconComponent = valueIcons[index];
               return (
                 <Card key={value.title} className="text-center">
-                  <div className="mx-auto mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
-                    <IconComponent className="h-6 w-6" />
+                  <div className="mx-auto mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-accent/8 text-accent">
+                    <IconComponent className="h-5 w-5" />
                   </div>
                   <CardTitle className="text-center mb-2">
                     {value.title}
@@ -77,20 +77,20 @@ export default function AboutPage() {
       </section>
 
       {/* Differentiators */}
-      <section className="py-20 lg:py-24">
+      <section className="py-24 lg:py-28">
         <Container>
           <SectionHeading
             title="What Sets Us Apart"
             subtitle="The CloudKeeping difference."
           />
 
-          <div className="grid gap-8 lg:grid-cols-3">
+          <div className="grid gap-10 lg:grid-cols-3">
             {aboutContent.differentiators.map((diff, index) => (
-              <div key={diff.title} className="relative pl-8">
-                <div className="absolute left-0 top-0 flex h-6 w-6 items-center justify-center rounded-full bg-accent text-xs font-bold text-white">
+              <div key={diff.title} className="relative pl-10">
+                <div className="absolute left-0 top-0 flex h-7 w-7 items-center justify-center rounded-full border border-accent/30 bg-accent/8 text-xs font-semibold text-accent">
                   {index + 1}
                 </div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">
+                <h3 className="text-base font-semibold tracking-tight text-foreground mb-2">
                   {diff.title}
                 </h3>
                 <p className="text-sm text-muted leading-relaxed">

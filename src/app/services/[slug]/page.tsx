@@ -61,12 +61,12 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             ]}
           />
 
-          <div className="flex items-start gap-4">
-            <div className="shrink-0 inline-flex h-16 w-16 items-center justify-center rounded-xl bg-accent/10 text-accent">
-              <Icon name={service.icon as IconName} className="h-8 w-8" />
+          <div className="flex items-start gap-5">
+            <div className="shrink-0 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-accent/8 text-accent">
+              <Icon name={service.icon as IconName} className="h-7 w-7" />
             </div>
             <div>
-              <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+              <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
                 {service.title}
               </h1>
               <p className="mt-4 text-lg text-muted leading-relaxed max-w-2xl">
@@ -82,7 +82,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         <Container>
           <div className="grid gap-12 lg:grid-cols-3">
             <div className="lg:col-span-2">
-              <h2 className="text-2xl font-bold text-foreground mb-6">
+              <h2 className="text-2xl font-semibold tracking-tight text-foreground mb-6">
                 What&apos;s Included
               </h2>
               <div className="grid gap-3 sm:grid-cols-2">
@@ -100,10 +100,10 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
               {/* Who It's For */}
               <div className="mt-12">
-                <h2 className="text-2xl font-bold text-foreground mb-4">
+                <h2 className="text-2xl font-semibold tracking-tight text-foreground mb-4">
                   Who It&apos;s For
                 </h2>
-                <div className="rounded-xl border border-border bg-surface p-6">
+                <div className="rounded-2xl border border-border/60 bg-surface p-6">
                   <p className="text-muted leading-relaxed">
                     {service.whoItsFor}
                   </p>
@@ -112,7 +112,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
               {/* Key Outcomes */}
               <div className="mt-12">
-                <h2 className="text-2xl font-bold text-foreground mb-6">
+                <h2 className="text-2xl font-semibold tracking-tight text-foreground mb-6">
                   Key Outcomes
                 </h2>
                 <div className="grid gap-6 sm:grid-cols-3">
@@ -130,11 +130,12 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             <div className="lg:col-span-1">
               <div className="sticky top-28 space-y-6">
                 {/* CTA Card */}
-                <Card className="bg-primary p-8 text-center border-0">
-                  <h3 className="text-xl font-bold text-white mb-2">
+                <Card className="relative overflow-hidden bg-primary p-8 text-center border-0">
+                  <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-accent to-transparent opacity-50" />
+                  <h3 className="text-lg font-semibold text-white mb-2">
                     Get Started with {service.title}
                   </h3>
-                  <p className="text-white/70 text-sm mb-6">
+                  <p className="text-white/50 text-sm mb-6">
                     Book a free consultation to discuss your needs.
                   </p>
                   <LinkButton
@@ -150,15 +151,15 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
                 {/* Related Services */}
                 <Card>
-                  <h3 className="text-sm font-semibold uppercase tracking-wider text-muted mb-4">
+                  <h3 className="text-xs font-semibold uppercase tracking-[0.15em] text-muted mb-4">
                     Other Services
                   </h3>
-                  <ul className="space-y-3">
+                  <ul className="space-y-2">
                     {relatedServices.map((related) => (
                       <li key={related.slug}>
                         <Link
                           href={`/services/${related.slug}`}
-                          className="flex items-center gap-3 rounded-lg p-2 -mx-2 text-sm text-muted transition-colors hover:text-foreground hover:bg-surface"
+                          className="flex items-center gap-3 rounded-xl p-2.5 -mx-2.5 text-sm text-muted transition-colors hover:text-foreground hover:bg-surface"
                         >
                           <Icon
                             name={related.icon as IconName}
