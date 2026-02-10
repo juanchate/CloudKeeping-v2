@@ -21,12 +21,13 @@ export function LanguageToggle({ locale, className }: LanguageToggleProps) {
     <Link
       href={otherPath}
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-medium uppercase tracking-wider text-muted transition-colors hover:text-foreground hover:bg-surface",
+        "inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-sm font-medium text-muted transition-colors hover:text-foreground hover:bg-surface",
         className
       )}
       title={locale === "en" ? "Cambiar a Español" : "Switch to English"}
     >
-      {otherLocale === "es" ? "ES" : "EN"}
+      {otherLocale === "es" ? "🇪🇸" : "🇬🇧"}
+      <span className="text-xs uppercase tracking-wider">{otherLocale === "es" ? "ES" : "EN"}</span>
     </Link>
   );
 }
