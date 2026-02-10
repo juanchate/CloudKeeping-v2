@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { SITE_NAME, NAV_HREFS, CONTACT } from "@/lib/constants";
 import { LinkButton } from "@/components/ui/LinkButton";
@@ -54,17 +53,17 @@ export function Header({ dict, locale }: HeaderProps) {
           {/* Logo */}
           <Link
             href={`/${locale}`}
-            className="flex items-center gap-2 text-primary transition-colors hover:text-primary-light"
+            className="flex items-center gap-2.5 text-primary transition-colors hover:text-primary-light"
           >
-            <Image
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src="/images/ck_logo.png"
               alt="CloudKeeping logo"
-              width={34}
-              height={34}
-              className="h-[34px] w-[34px] object-contain"
-              priority
+              width={40}
+              height={40}
+              className="h-10 w-10 object-contain"
             />
-            <span className="text-xl font-bold tracking-tight" style={{ fontFamily: "var(--font-logo)" }}>
+            <span className="text-[22px] font-black tracking-tight" style={{ fontFamily: "var(--font-logo)" }}>
               {SITE_NAME}
             </span>
           </Link>

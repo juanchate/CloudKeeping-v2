@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { SITE_NAME, LEGAL_NAME, CONTACT, NAV_HREFS } from "@/lib/constants";
 import { Phone, Mail, Clock, MapPin } from "lucide-react";
@@ -30,15 +29,16 @@ export function Footer({ dict, locale }: FooterProps) {
       <Container>
         <div className="grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-1">
-            <Link href={`/${locale}`} className="inline-flex items-center gap-2 text-white">
-              <Image
+            <Link href={`/${locale}`} className="inline-flex items-center gap-2.5 text-white">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src="/images/ck_logo.png"
                 alt="CloudKeeping logo"
-                width={30}
-                height={30}
-                className="h-[30px] w-[30px] object-contain brightness-0 invert"
+                width={34}
+                height={34}
+                className="h-[34px] w-[34px] object-contain brightness-0 invert"
               />
-              <span className="text-xl font-bold tracking-tight" style={{ fontFamily: "var(--font-logo)" }}>
+              <span className="text-[22px] font-black tracking-tight" style={{ fontFamily: "var(--font-logo)" }}>
                 {SITE_NAME}
               </span>
             </Link>
