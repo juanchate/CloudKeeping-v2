@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { SITE_NAME, LEGAL_NAME, CONTACT, NAV_HREFS } from "@/lib/constants";
 import { Phone, Mail, Clock, MapPin } from "lucide-react";
@@ -30,12 +31,13 @@ export function Footer({ dict, locale }: FooterProps) {
         <div className="grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-1">
             <Link href={`/${locale}`} className="inline-flex items-center gap-2 text-xl font-semibold text-white">
-              <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <rect width="32" height="32" rx="8" fill="rgba(200,146,42,0.25)" />
-                <path d="M10 16C10 12.6863 12.6863 10 16 10C17.5913 10 19.0174 10.6321 20.0711 11.6569" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
-                <path d="M22 16C22 19.3137 19.3137 22 16 22C14.4087 22 12.9826 21.3679 11.9289 20.3431" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
-                <circle cx="16" cy="16" r="2" fill="white" />
-              </svg>
+              <Image
+                src="/images/ck_logo.png"
+                alt="CloudKeeping logo"
+                width={30}
+                height={30}
+                className="h-[30px] w-[30px] object-contain brightness-0 invert"
+              />
               {SITE_NAME}
             </Link>
             <p className="mt-4 text-sm leading-relaxed text-white/50">{dict.footer.description}</p>

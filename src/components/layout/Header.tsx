@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { SITE_NAME, NAV_HREFS, CONTACT } from "@/lib/constants";
 import { LinkButton } from "@/components/ui/LinkButton";
@@ -53,14 +54,16 @@ export function Header({ dict, locale }: HeaderProps) {
           {/* Logo */}
           <Link
             href={`/${locale}`}
-            className="flex items-center gap-2.5 text-xl font-semibold text-primary transition-colors hover:text-primary-light"
+            className="flex items-center gap-2 text-xl font-semibold text-primary transition-colors hover:text-primary-light"
           >
-            <svg width="30" height="30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <rect width="32" height="32" rx="8" fill="currentColor" />
-              <path d="M10 16C10 12.6863 12.6863 10 16 10C17.5913 10 19.0174 10.6321 20.0711 11.6569" stroke="#C8922A" strokeWidth="2.5" strokeLinecap="round" />
-              <path d="M22 16C22 19.3137 19.3137 22 16 22C14.4087 22 12.9826 21.3679 11.9289 20.3431" stroke="#C8922A" strokeWidth="2.5" strokeLinecap="round" />
-              <circle cx="16" cy="16" r="2" fill="#C8922A" />
-            </svg>
+            <Image
+              src="/images/ck_logo.png"
+              alt="CloudKeeping logo"
+              width={34}
+              height={34}
+              className="h-[34px] w-[34px] object-contain"
+              priority
+            />
             {SITE_NAME}
           </Link>
 
