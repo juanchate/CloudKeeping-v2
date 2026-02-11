@@ -104,7 +104,7 @@ export async function POST(request: Request) {
       subject: `New Contact Form Submission from ${name}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #1e3a5f; border-bottom: 2px solid #0d9488; padding-bottom: 10px;">
+          <h2 style="color: #1a2e4a; border-bottom: 2px solid #C8922A; padding-bottom: 10px;">
             New Contact Form Submission
           </h2>
           <table style="width: 100%; border-collapse: collapse;">
@@ -115,7 +115,7 @@ export async function POST(request: Request) {
             <tr>
               <td style="padding: 8px 0; font-weight: bold; color: #64748b;">Email:</td>
               <td style="padding: 8px 0;">
-                <a href="mailto:${escapeHtml(email)}" style="color: #0d9488;">${escapeHtml(email)}</a>
+                <a href="mailto:${escapeHtml(email)}" style="color: #C8922A;">${escapeHtml(email)}</a>
               </td>
             </tr>
             ${
@@ -123,7 +123,7 @@ export async function POST(request: Request) {
                 ? `<tr>
               <td style="padding: 8px 0; font-weight: bold; color: #64748b;">Phone:</td>
               <td style="padding: 8px 0;">
-                <a href="tel:${escapeHtml(phone)}" style="color: #0d9488;">${escapeHtml(phone)}</a>
+                <a href="tel:${escapeHtml(phone)}" style="color: #C8922A;">${escapeHtml(phone)}</a>
               </td>
             </tr>`
                 : ""
@@ -134,7 +134,7 @@ export async function POST(request: Request) {
             <p style="margin: 0; white-space: pre-wrap;">${escapeHtml(message)}</p>
           </div>
           <p style="margin-top: 20px; font-size: 12px; color: #94a3b8;">
-            Submitted from cloudkeeping.info contact form at ${new Date().toLocaleString("en-CA", { timeZone: "America/Vancouver" })} PST
+            Submitted from cloudkeeping.cpa contact form at ${new Date().toLocaleString("en-CA", { timeZone: "America/Vancouver" })} PST
           </p>
         </div>
       `,
