@@ -98,7 +98,7 @@ export async function POST(request: Request) {
     const resend = new Resend(resendApiKey);
 
     await resend.emails.send({
-      from: "CloudKeeping Website <noreply@cloudkeeping.cpa>",
+      from: "CloudKeeping <website@cloudkeeping.cpa>",
       to: [contactEmail],
       replyTo: email,
       subject: `New Contact Form Submission from ${name}`,
