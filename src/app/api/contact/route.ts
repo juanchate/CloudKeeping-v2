@@ -98,11 +98,11 @@ export async function POST(request: Request) {
     const resend = new Resend(resendApiKey);
 
     await resend.emails.send({
-      from: "CloudKeeping <website@cloudkeeping.cpa>",
+      from: `${name} <website@cloudkeeping.cpa>`,
       to: [contactEmail],
       replyTo: email,
-      subject: `${name} — New inquiry via cloudkeeping.cpa`,
-      text: `${name} sent a message through the website:\n\n${message}\n\n---\nEmail: ${email}${phone ? `\nPhone: ${phone}` : ""}\nSent: ${new Date().toLocaleString("en-CA", { timeZone: "America/Vancouver" })} PST`,
+      subject: message.slice(0, 60).split("\n")[0],
+      text: `${message}\n\n${name}\n${email}${phone ? `\n${phone}` : ""}`,
     });
 
     return NextResponse.json({ success: true });
