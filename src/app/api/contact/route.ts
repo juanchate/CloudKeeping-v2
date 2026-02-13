@@ -98,11 +98,46 @@ export async function POST(request: Request) {
     const resend = new Resend(resendApiKey);
 
     await resend.emails.send({
-      from: `${name} <website@cloudkeeping.cpa>`,
+      from: "CloudKeeping <website@cloudkeeping.cpa>",
       to: [contactEmail],
       replyTo: email,
-      subject: message.slice(0, 60).split("\n")[0],
-      text: `${message}\n\n${name}\n${email}${phone ? `\n${phone}` : ""}`,
+      subject: `New Contact Form Submission from ${name}`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #1a2e4a; border-bottom: 2px solid #C8922A; padding-bottom: 10px;">
+            New Contact Form Submission
+          </h2>
+          <table style="width: 100%; border-collapse: collapse;">
+            <tr>
+              <td style="padding: 8px 0; font-weight: bold; color: #64748b; width: 100px;">Name:</td>
+              <td style="padding: 8px 0;">${escapeHtml(name)}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; font-weight: bold; color: #64748b;">Email:</td>
+              <td style="padding: 8px 0;">
+                <a href="mailto:${escapeHtml(email)}" style="color: #C8922A;">${escapeHtml(email)}</a>
+              </td>
+            </tr>
+            ${
+              phone
+                ? `<tr>
+              <td style="padding: 8px 0; font-weight: bold; color: #64748b;">Phone:</td>
+              <td style="padding: 8px 0;">
+                <a href="tel:${escapeHtml(phone)}" style="color: #C8922A;">${escapeHtml(phone)}</a>
+              </td>
+            </tr>`
+                : ""
+            }
+          </table>
+          <div style="margin-top: 20px; padding: 16px; background: #f8fafc; border-radius: 8px;">
+            <p style="margin: 0 0 8px 0; font-weight: bold; color: #64748b;">Message:</p>
+            <p style="margin: 0; white-space: pre-wrap;">${escapeHtml(message)}</p>
+          </div>
+          <p style="margin-top: 20px; font-size: 12px; color: #94a3b8;">
+            Submitted from cloudkeeping.cpa contact form at ${new Date().toLocaleString("en-CA", { timeZone: "America/Vancouver" })} PST
+          </p>
+        </div>
+      `,
     });
 
     return NextResponse.json({ success: true });
