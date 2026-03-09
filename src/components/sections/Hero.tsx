@@ -15,6 +15,7 @@ export function Hero({ content, locale }: HeroProps) {
           <h1 className="text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-6xl lg:leading-[1.1]">
             {content.title}{" "}<span className="text-accent-light">{content.titleAccent}</span>
           </h1>
+          <p className="mt-4 text-lg italic text-white/40">{content.tagline}</p>
           <p className="mt-6 text-lg leading-relaxed text-white/60 sm:text-xl max-w-2xl mx-auto">{content.subtitle}</p>
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <LinkButton href={`/${locale}/contact`} variant="primary" size="lg" trackLabel="Hero - Book a Consultation">{content.ctaPrimary}</LinkButton>

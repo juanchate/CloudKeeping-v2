@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { isValidLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
 import { createPageMetadata } from "@/lib/seo";
+import { SITE_NAME, SITE_URL } from "@/lib/constants";
 import { notFound } from "next/navigation";
 import { Hero } from "@/components/sections/Hero";
 import { ServicesOverview } from "@/components/sections/ServicesOverview";
@@ -31,8 +32,30 @@ export default async function HomePage({ params }: Props) {
   if (!isValidLocale(locale)) notFound();
   const d = getDictionary(locale as Locale);
 
+  const reviewSchema = {
+    "@context": "https://schema.org",
+    "@type": "AccountingService",
+    "@id": `${SITE_URL}/#organization`,
+    name: SITE_NAME,
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "5",
+      reviewCount: String(d.testimonials.items.length),
+      bestRating: "5",
+      worstRating: "1",
+    },
+    review: d.testimonials.items.map((t) => ({
+      "@type": "Review",
+      author: { "@type": "Person", name: t.name },
+      reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5", worstRating: "1" },
+      reviewBody: t.quote,
+      publisher: { "@type": "Organization", name: t.company },
+    })),
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(reviewSchema) }} />
       <Hero content={d.hero} locale={locale} />
       <ServicesOverview content={d.servicesSection} services={d.services} locale={locale} />
       <WhyCloudKeeping content={d.whyUs} />

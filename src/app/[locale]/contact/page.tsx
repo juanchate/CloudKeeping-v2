@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { ContactForm } from "@/components/forms/ContactForm";
-import { CONTACT } from "@/lib/constants";
+import { CONTACT, SITE_URL } from "@/lib/constants";
 import { Phone, Mail, Clock, MapPin } from "lucide-react";
 import { isValidLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
@@ -37,8 +37,18 @@ export default async function ContactPage({ params }: Props) {
   const d = getDictionary(locale as Locale);
   const c = d.contact;
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: d.nav.home, item: `${SITE_URL}/${locale}` },
+      { "@type": "ListItem", position: 2, name: d.nav.contact, item: `${SITE_URL}/${locale}/contact` },
+    ],
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <section className="bg-gradient-to-b from-surface to-white py-16 lg:py-20">
         <Container><div className="mx-auto max-w-2xl text-center">
           <h1 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">{c.pageTitle}</h1>

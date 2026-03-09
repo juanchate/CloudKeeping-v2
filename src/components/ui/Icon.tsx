@@ -14,6 +14,7 @@ import {
   ChevronRight,
   Check,
   ArrowRight,
+  FileText,
   type LucideProps,
 } from "lucide-react";
 
@@ -33,6 +34,7 @@ const iconMap = {
   ChevronRight,
   Check,
   ArrowRight,
+  FileText,
 } as const;
 
 export type IconName = keyof typeof iconMap;

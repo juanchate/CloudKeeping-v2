@@ -9,18 +9,19 @@ const es = {
     whatsapp: "Escr\u00edbenos por WhatsApp",
   },
   hero: {
-    badge: "Contabilidad \u00B7 Teneduría \u00B7 Impuestos",
-    title: "Contabilidad Que Trabaja",
-    titleAccent: "Tan Duro Como T\u00fa",
+    badge: "Firma CPA \u00B7 Contabilidad \u00B7 Teneduría \u00B7 Impuestos",
+    title: "Teneduría, Impuestos y Contabilidad",
+    titleAccent: "en Vancouver para Pequeños Negocios",
+    tagline: "Contabilidad que trabaja tan duro como tú.",
     subtitle:
-      "Firma de contabilidad, teneduría de libros y planificaci\u00f3n fiscal de confianza en Vancouver para peque\u00f1os negocios y contratistas en British Columbia. Obt\u00e9n claridad, cumple con la CRA y enf\u00f3cate en crecer.",
+      "Servicios de teneduría de libros, planificación fiscal y contabilidad liderados por un CPA para pequeños negocios, contratistas y profesionales incorporados en Vancouver, Surrey, White Rock y toda British Columbia. Cumple con la CRA y enfócate en crecer.",
     ctaPrimary: "Consulta Gratuita",
     ctaSecondary: "Nuestros Servicios",
   },
   servicesSection: {
     heading: "Servicios de Contabilidad y Teneduría en Vancouver, BC",
     subheading:
-      "Servicios financieros integrales para peque\u00f1as y medianas empresas en toda British Columbia.",
+      "Servicios financieros integrales para pequeñas y medianas empresas en Vancouver, Surrey, White Rock, Burnaby y todo el Lower Mainland.",
     learnMore: "M\u00e1s informaci\u00f3n",
   },
   services: [
@@ -41,7 +42,7 @@ const es = {
         "Configuraci\u00f3n de software contable en la nube (QuickBooks, Xero, Sage)",
       ],
       whoItsFor:
-        "Peque\u00f1as y medianas empresas en Vancouver y BC que buscan servicios de teneduría de libros confiables sin el costo de un equipo interno.",
+        "Pequeñas y medianas empresas en Vancouver, Surrey, White Rock, Burnaby y toda BC que buscan servicios de teneduría de libros confiables sin el costo de un equipo interno.",
       outcomes: [
         { title: "Claridad Financiera", description: "Conoce siempre tu posici\u00f3n de caja, cuentas por cobrar y por pagar con registros precisos." },
         { title: "Listo para la CRA", description: "Libros limpios todo el a\u00f1o significan declaraciones m\u00e1s r\u00e1pidas ante la CRA sin apuros de \u00faltimo momento." },
@@ -65,16 +66,40 @@ const es = {
         "Asesor\u00eda fiscal y monitoreo de cumplimiento durante todo el a\u00f1o",
       ],
       whoItsFor:
-        "Profesionales incorporados, contratistas independientes y due\u00f1os de negocios en Vancouver y BC que desean minimizar su carga fiscal manteniendo pleno cumplimiento con la CRA.",
+        "Profesionales incorporados, contratistas independientes y dueños de negocios en Vancouver, Surrey, White Rock y toda BC que desean minimizar su carga fiscal manteniendo pleno cumplimiento con la CRA.",
       outcomes: [
         { title: "Menor Carga Fiscal", description: "Planificaci\u00f3n estrat\u00e9gica que identifica deducciones y cr\u00e9ditos leg\u00edtimos espec\u00edficos para negocios en BC." },
         { title: "Cumplimiento Total con la CRA", description: "Nunca m\u00e1s te preocupes por plazos perdidos, declaraciones incorrectas o multas de la CRA." },
-        { title: "Tranquilidad", description: "Confianza en que tus asuntos fiscales est\u00e1n gestionados por profesionales fiscales canadienses experimentados." },
+        { title: "Tranquilidad", description: "Confianza en que tus asuntos fiscales están gestionados por profesionales fiscales canadienses experimentados." },
+      ],
+    },
+    {
+      slug: "personal-tax",
+      title: "Declaración de Impuestos Personales",
+      shortDescription:
+        "Preparación experta de declaraciones T1 de impuestos personales para individuos, contratistas y profesionales autónomos en Vancouver, Surrey y toda BC.",
+      description:
+        "Ya seas empleado, freelancer, contratista independiente o profesional autónomo en British Columbia, preparamos declaraciones T1 de impuestos personales precisas que maximizan tu reembolso y aseguran el pleno cumplimiento con la CRA. Nuestro equipo experimentado maneja ingresos por empleo, ingresos por alquiler, ingresos por inversiones, ingresos por trabajo autónomo y todas las deducciones y créditos disponibles para residentes de BC.",
+      icon: "FileText",
+      included: [
+        "Preparación y presentación de declaraciones T1 de impuestos personales",
+        "Declaraciones fiscales para autónomos y freelancers",
+        "Reporte de ingresos por alquiler y deducciones",
+        "Reporte de ingresos por inversiones y ganancias de capital",
+        "Optimización de RRSP, TFSA e ingresos de jubilación",
+        "Presentación de declaraciones de años anteriores y enmendadas",
+      ],
+      whoItsFor:
+        "Individuos, contratistas independientes, freelancers y profesionales autónomos en Vancouver, Surrey, White Rock y toda BC que quieren que sus impuestos personales sean presentados de forma precisa y puntual por una firma liderada por un CPA.",
+      outcomes: [
+        { title: "Máximo Reembolso", description: "Identificamos cada deducción y crédito elegible para que conserves más de tu dinero." },
+        { title: "Cumplimiento CRA", description: "Presentación precisa y puntual que te mantiene en buena posición ante la Agencia de Ingresos de Canadá." },
+        { title: "Declaración Sin Estrés", description: "Delega tus impuestos personales a profesionales y elimina la complejidad de hacerlo tú mismo." },
       ],
     },
     {
       slug: "payroll",
-      title: "Servicios de N\u00f3mina",
+      title: "Servicios de Nómina",
       shortDescription:
         "Procesamiento de n\u00f3mina confiable para negocios en BC. Tu equipo recibe su pago de forma precisa y puntual, siempre.",
       description:
@@ -89,7 +114,7 @@ const es = {
         "Reportes de compensaci\u00f3n laboral y WorkSafeBC",
       ],
       whoItsFor:
-        "Empresas con empleados en Vancouver y BC que necesitan un procesamiento de n\u00f3mina confiable y preciso sin la complejidad de gestionarlo internamente.",
+        "Empresas con empleados en Vancouver, Surrey, Burnaby, Coquitlam y toda BC que necesitan un procesamiento de nómina confiable y preciso sin la complejidad de gestionarlo internamente.",
       outcomes: [
         { title: "Precisi\u00f3n Garantizada", description: "C\u00e1lculos exactos en cada per\u00edodo de pago, eliminando errores costosos y preocupaciones." },
         { title: "Cumplimiento Regulatorio", description: "Todas las remesas ante la CRA presentadas a tiempo y con montos correctos." },
@@ -113,7 +138,7 @@ const es = {
         "Consulta financiera estrat\u00e9gica continua",
       ],
       whoItsFor:
-        "Negocios en crecimiento y fundadores de startups en Vancouver y BC que necesitan m\u00e1s que teneduría \u2014 necesitan un socio financiero que gu\u00ede sus decisiones estrat\u00e9gicas.",
+        "Negocios en crecimiento y fundadores de startups en Vancouver, Surrey, Richmond y todo el Lower Mainland que necesitan más que teneduría \u2014 necesitan un socio financiero que guíe sus decisiones estratégicas.",
       outcomes: [
         { title: "Decisiones Informadas", description: "Informaci\u00f3n financiera clara y reportes que impulsan decisiones de negocio m\u00e1s inteligentes." },
         { title: "Planificaci\u00f3n de Crecimiento", description: "Presupuestos, proyecciones y KPIs para un crecimiento sostenible y rentable." },
@@ -122,10 +147,10 @@ const es = {
     },
   ],
   whyUs: {
-    heading: "Por Qu\u00e9 los Negocios en Vancouver Eligen CloudKeeping",
-    subheading: "Vamos m\u00e1s all\u00e1 de los n\u00fameros para ofrecer servicios contables en los que puedes confiar.",
+    heading: "Por Qué los Negocios en Vancouver y el Lower Mainland Eligen CloudKeeping",
+    subheading: "Vamos más allá de los números para ofrecer servicios contables en los que puedes confiar en Vancouver, Surrey, White Rock y toda BC.",
     items: [
-      { title: "Enfoque en Cumplimiento CRA", description: "Nos mantenemos al d\u00eda con las regulaciones fiscales canadienses y los requisitos de la CRA para que nunca tengas que preocuparte por multas.", icon: "ShieldCheck" },
+      { title: "Liderados por un CPA, Enfoque en Cumplimiento CRA", description: "Liderados por un Contador Profesional Certificado (CPA), nos mantenemos al día con las regulaciones fiscales canadienses y los requisitos de la CRA para que nunca tengas que preocuparte por multas.", icon: "ShieldCheck" },
       { title: "Soporte Fiscal y Financiero Proactivo", description: "No solo reaccionamos a los problemas, los anticipamos. Desde planificaci\u00f3n fiscal hasta proyecci\u00f3n de flujo de caja, mantenemos tu negocio en BC un paso adelante.", icon: "Lightbulb" },
       { title: "Comunicaci\u00f3n Clara", description: "Sin jerga, sin sorpresas. Explicamos tu posici\u00f3n financiera en lenguaje simple y siempre estamos disponibles para tus preguntas.", icon: "MessageSquare" },
       { title: "Tecnolog\u00eda en la Nube", description: "Utilizamos QuickBooks, Xero y herramientas modernas en la nube para entregar resultados m\u00e1s r\u00e1pidos y precisos con acceso seguro en tiempo real.", icon: "Cloud" },
@@ -165,13 +190,14 @@ const es = {
     stillSubtitle: "Con gusto te ayudamos. Cont\u00e1ctanos y te responderemos en un d\u00eda h\u00e1bil.",
     contactUs: "Cont\u00e1ctanos",
     items: [
-      { question: "\u00bfCon qu\u00e9 tipos de negocios trabajan en Vancouver?", answer: "Trabajamos principalmente con peque\u00f1as y medianas empresas, profesionales incorporados y contratistas independientes en Vancouver y British Columbia. Nuestros clientes abarcan industrias como servicios profesionales, construcci\u00f3n, tecnolog\u00eda, comercio, salud y bienes ra\u00edces. Si no est\u00e1s seguro, agenda una consulta gratuita sin compromiso.", category: "General" },
+      { question: "¿Con qué tipos de negocios trabajan en Vancouver y Surrey?", answer: "Trabajamos principalmente con pequeñas y medianas empresas, profesionales incorporados y contratistas independientes en Vancouver, Surrey, White Rock, Burnaby, Coquitlam, Richmond y toda British Columbia. Nuestros clientes abarcan industrias como servicios profesionales, construcción, tecnología, comercio, salud y bienes raíces. Si no estás seguro, agenda una consulta gratuita sin compromiso.", category: "General" },
       { question: "\u00bfC\u00f3mo empiezo con un tenedor de libros en Vancouver?", answer: "Comenzar es sencillo. Agenda una consulta gratuita por nuestro formulario, WhatsApp o tel\u00e9fono. Durante la consulta, revisaremos tu situaci\u00f3n financiera actual, entenderemos tus necesidades y recomendaremos los servicios de teneduría y contabilidad que tengan sentido para tu negocio.", category: "General" },
       { question: "\u00bfQu\u00e9 software contable soportan?", answer: "Trabajamos con plataformas contables l\u00edderes en la nube incluyendo QuickBooks Online, Xero y Sage. Si ya usas una plataforma, trabajamos con tu configuraci\u00f3n existente. Si est\u00e1s comenzando, te recomendaremos la mejor opci\u00f3n de contabilidad en la nube seg\u00fan tus necesidades y presupuesto.", category: "General" },
       { question: "\u00bfCon qu\u00e9 frecuencia recibir\u00e9 reportes financieros?", answer: "Proporcionamos estados financieros mensuales como parte de nuestro servicio est\u00e1ndar, incluyendo estado de resultados, balance general y resumen de flujo de caja. Para clientes de consultor\u00eda, ofrecemos reportes m\u00e1s frecuentes y dashboards personalizados.", category: "Servicios" },
       { question: "\u00bfPueden ayudar con auditor\u00edas o disputas con la CRA?", answer: "Absolutamente. Si recibes un aviso de la CRA, revisamos la correspondencia, preparamos la documentaci\u00f3n necesaria y representamos tus intereses. Nuestro enfoque proactivo de cumplimiento fiscal canadiense asegura que nuestros clientes est\u00e9n bien posicionados.", category: "Servicios" },
       { question: "\u00bfCu\u00e1nto cuestan los servicios de teneduría y contabilidad en Vancouver?", answer: "Nuestras tarifas dependen del alcance y complejidad de los servicios. Ofrecemos precios fijos y transparentes para la mayor\u00eda de nuestros servicios de teneduría, impuestos y n\u00f3mina. Durante tu consulta inicial te daremos una cotizaci\u00f3n clara sin cargos ocultos.", category: "Precios" },
-      { question: "\u00bfOfrecen servicios de teneduría virtuales en toda BC?", answer: "S\u00ed. Todos nuestros servicios de teneduría, impuestos y contabilidad est\u00e1n disponibles de forma remota en toda British Columbia. Usamos herramientas seguras en la nube, lo que significa que recibes el mismo nivel de servicio ya sea en Vancouver, Victoria, Kelowna o cualquier lugar de BC.", category: "General" },
+      { question: "¿Ofrecen servicios de teneduría virtuales en toda BC?", answer: "Sí. Todos nuestros servicios de teneduría, impuestos y contabilidad están disponibles de forma remota en toda British Columbia. Usamos herramientas seguras en la nube, lo que significa que recibes el mismo nivel de servicio ya sea en Vancouver, Surrey, White Rock, Victoria, Kelowna o cualquier lugar de BC.", category: "General" },
+      { question: "¿Preparan declaraciones de impuestos personales (T1) en Vancouver?", answer: "Sí. Preparamos declaraciones T1 de impuestos personales para individuos, freelancers, contratistas independientes y profesionales autónomos en Vancouver, Surrey, White Rock y toda BC. Manejamos ingresos por empleo, alquiler, inversiones, trabajo autónomo y nos aseguramos de que reclames cada deducción y crédito elegible. Visita nuestra página de servicios de impuestos personales para más detalles.", category: "Servicios" },
       { question: "\u00bfCu\u00e1l es la diferencia entre teneduría de libros y contabilidad?", answer: "La teneduría se enfoca en el registro diario de transacciones financieras. La contabilidad va m\u00e1s all\u00e1, involucrando an\u00e1lisis, reportes, planificaci\u00f3n fiscal y asesor\u00eda estrat\u00e9gica. La mayor\u00eda de los negocios en BC se benefician de ambos, y ofrecemos servicios integrados.", category: "Servicios" },
       { question: "\u00bfC\u00f3mo aseguran la seguridad de mis datos financieros?", answer: "La seguridad de datos es prioridad. Usamos plataformas encriptadas en la nube con seguridad de nivel bancario, autenticaci\u00f3n multifactor y controles de acceso. Seguimos las mejores pr\u00e1cticas canadienses de protecci\u00f3n de datos.", category: "General" },
       { question: "\u00bfPuedo cambiarme a CloudKeeping desde otro contador?", answer: "Por supuesto, y hacemos la transici\u00f3n lo m\u00e1s fluida posible. Nos coordinamos con tu proveedor anterior, revisamos tus libros actuales y nos encargamos de todo el proceso de migraci\u00f3n. La mayor\u00eda de las transiciones para negocios en Vancouver se completan en una o dos semanas.", category: "General" },
@@ -181,8 +207,8 @@ const es = {
     pageTitle: "Sobre CloudKeeping \u2014 Contadores y Tenedores en Vancouver",
     pageSubtitle: "Servicios profesionales de contabilidad y teneduría en Vancouver, BC \u2014 construidos sobre precisi\u00f3n, transparencia y compromiso con tu \u00e9xito.",
     storyTitle: "Nuestra Historia",
-    story: "CloudKeeping fue fundada en British Columbia con una misi\u00f3n clara: proporcionar a las peque\u00f1as y medianas empresas el mismo calibre de servicios de contabilidad y teneduría que las grandes corporaciones dan por sentado. Creemos que todo negocio en Vancouver y BC merece libros precisos, planificaci\u00f3n fiscal proactiva y un socio financiero de confianza.",
-    storyExtended: "Con sede en Vancouver, BC, nuestro equipo aporta m\u00e1s de una d\u00e9cada de experiencia en contabilidad canadiense, planificaci\u00f3n fiscal y asesor\u00eda empresarial. Hemos construido nuestra pr\u00e1ctica sobre los principios de precisi\u00f3n, cumplimiento con la CRA y servicio centrado en el cliente.",
+    story: "CloudKeeping fue fundada en British Columbia con una misión clara: proporcionar a las pequeñas y medianas empresas el mismo calibre de servicios de contabilidad y teneduría liderados por un CPA que las grandes corporaciones dan por sentado. Creemos que todo negocio en Vancouver, Surrey, White Rock y todo el Lower Mainland merece libros precisos, planificación fiscal proactiva y un socio financiero de confianza.",
+    storyExtended: "Con sede en Vancouver, BC, nuestro equipo liderado por un CPA aporta más de una década de experiencia en contabilidad canadiense, planificación fiscal y asesoría empresarial. Servimos clientes en Vancouver, Surrey, White Rock, Burnaby, Richmond, Coquitlam y toda British Columbia. Hemos construido nuestra práctica sobre los principios de precisión, cumplimiento con la CRA y servicio centrado en el cliente.",
     valuesHeading: "Nuestros Valores",
     valuesSubheading: "Los principios que gu\u00edan cada compromiso y decisi\u00f3n que tomamos para nuestros clientes en BC.",
     values: [
@@ -201,14 +227,14 @@ const es = {
   },
   contact: {
     pageTitle: "Contacta a CloudKeeping \u2014 Contador y Tenedor en Vancouver",
-    pageSubtitle: "\u00bfListo para el siguiente paso? Env\u00edanos un mensaje o comun\u00edcate directamente. Servimos negocios en Vancouver y toda British Columbia. Respondemos en un d\u00eda h\u00e1bil.",
+    pageSubtitle: "¿Listo para el siguiente paso? Envíanos un mensaje o comunícate directamente. Servimos negocios en Vancouver, Surrey, White Rock, Burnaby y toda British Columbia. Respondemos en un día hábil.",
     formTitle: "Env\u00edanos un Mensaje",
     infoTitle: "Informaci\u00f3n de Contacto",
     phoneLabel: "Tel\u00e9fono / WhatsApp",
     emailLabel: "Email",
     hoursLabel: "Horario de Atenci\u00f3n",
     areaLabel: "\u00c1rea de Servicio",
-    areaNote: "Todos los servicios de teneduría y contabilidad disponibles de forma remota en BC",
+    areaNote: "Servimos Vancouver, Surrey, White Rock, Burnaby, Richmond, Coquitlam y toda BC \u2014 presencial y remoto",
     mapTitle: "Nuestra Ubicaci\u00f3n \u2014 Vancouver, BC",
     whatToExpect: "Qu\u00e9 Esperar",
     expectations: [
@@ -282,8 +308,8 @@ const es = {
     subtitle: "Nos encantar\u00eda conocer tu negocio y hablar sobre c\u00f3mo CloudKeeping puede ayudarte a crecer en BC.",
   },
   metadata: {
-    title: "CloudKeeping \u2014 Servicios de Teneduría, Impuestos y Contabilidad en Vancouver, BC",
-    description: "CloudKeeping ofrece servicios profesionales de teneduría de libros, planificaci\u00f3n fiscal, n\u00f3mina y contabilidad para peque\u00f1os negocios, contratistas y profesionales incorporados en Vancouver y British Columbia, Canad\u00e1. Cumplimiento CRA. Consulta gratuita.",
+    title: "Servicios de Teneduría, Impuestos y Contabilidad en Vancouver, BC",
+    description: "CloudKeeping es una firma liderada por un CPA que ofrece servicios profesionales de teneduría de libros, planificación fiscal, nómina y contabilidad para pequeños negocios, contratistas y profesionales incorporados en Vancouver, Surrey, White Rock y toda British Columbia, Canadá. Cumplimiento CRA. Consulta gratuita.",
   },
 };
 

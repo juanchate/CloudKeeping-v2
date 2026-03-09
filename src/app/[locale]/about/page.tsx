@@ -7,6 +7,7 @@ import { CTAStrip } from "@/components/sections/CTAStrip";
 import { isValidLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
 import { createPageMetadata } from "@/lib/seo";
+import { SITE_URL } from "@/lib/constants";
 import { Target, Shield, Eye, Headphones } from "lucide-react";
 
 interface Props { params: Promise<{ locale: string }> }
@@ -31,8 +32,18 @@ export default async function AboutPage({ params }: Props) {
   const d = getDictionary(locale as Locale);
   const a = d.about;
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: d.nav.home, item: `${SITE_URL}/${locale}` },
+      { "@type": "ListItem", position: 2, name: d.nav.about, item: `${SITE_URL}/${locale}/about` },
+    ],
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <section className="bg-gradient-to-b from-surface to-white py-16 lg:py-20">
         <Container><div className="mx-auto max-w-2xl text-center">
           <h1 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">{a.pageTitle}</h1>

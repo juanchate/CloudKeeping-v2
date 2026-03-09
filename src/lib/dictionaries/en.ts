@@ -9,18 +9,19 @@ const en = {
     whatsapp: "WhatsApp Us",
   },
   hero: {
-    badge: "Accounting \u00B7 Bookkeeping \u00B7 Tax",
-    title: "Accounting That Works",
-    titleAccent: "As Hard As You Do",
+    badge: "CPA-Led Firm \u00B7 Accounting \u00B7 Bookkeeping \u00B7 Tax",
+    title: "Vancouver Bookkeeping, Tax &",
+    titleAccent: "Accounting for Small Businesses",
+    tagline: "Accounting that works as hard as you do.",
     subtitle:
-      "Vancouver\u2019s trusted bookkeeping, tax planning, and accounting firm for small businesses and contractors across British Columbia. Get clarity, stay CRA-compliant, and focus on growth.",
+      "CPA-led bookkeeping, tax planning, and accounting services for small businesses, contractors, and incorporated professionals in Vancouver, Surrey, White Rock, and across British Columbia. Stay CRA-compliant and focus on growth.",
     ctaPrimary: "Book a Free Consultation",
     ctaSecondary: "Our Services",
   },
   servicesSection: {
     heading: "Accounting & Bookkeeping Services in Vancouver, BC",
     subheading:
-      "Comprehensive financial services tailored to small and medium-sized businesses across British Columbia.",
+      "Comprehensive financial services for small and medium-sized businesses in Vancouver, Surrey, White Rock, Burnaby, and across the Lower Mainland.",
     learnMore: "Learn more",
   },
   services: [
@@ -41,7 +42,7 @@ const en = {
         "Cloud-based accounting software setup (QuickBooks, Xero, Sage)",
       ],
       whoItsFor:
-        "Small and medium-sized businesses in Vancouver and BC looking for reliable, consistent bookkeeping services without the overhead of an in-house team.",
+        "Small and medium-sized businesses in Vancouver, Surrey, White Rock, Burnaby, and across BC looking for reliable, consistent bookkeeping services without the overhead of an in-house team.",
       outcomes: [
         { title: "Financial Clarity", description: "Always know your cash position, receivables, and payables with accurate, timely records." },
         { title: "Tax Readiness", description: "Clean books year-round mean smoother, faster CRA tax filings with no last-minute scrambles." },
@@ -65,11 +66,35 @@ const en = {
         "Year-round tax advisory and compliance monitoring",
       ],
       whoItsFor:
-        "Incorporated professionals, independent contractors, and business owners in Vancouver and BC who want to minimize their tax burden while maintaining full CRA compliance.",
+        "Incorporated professionals, independent contractors, and business owners in Vancouver, Surrey, White Rock, and across BC who want to minimize their tax burden while maintaining full CRA compliance.",
       outcomes: [
         { title: "Reduced Tax Burden", description: "Strategic planning that identifies legitimate deductions and credits specific to BC businesses." },
         { title: "Full CRA Compliance", description: "Never worry about missed deadlines, incorrect filings, or CRA penalties again." },
         { title: "Peace of Mind", description: "Confidence that your tax affairs are managed by experienced Canadian tax professionals who stay current with tax law." },
+      ],
+    },
+    {
+      slug: "personal-tax",
+      title: "Personal Tax Filing & Returns",
+      shortDescription:
+        "Expert T1 personal tax return preparation for individuals, contractors, and self-employed professionals in Vancouver, Surrey, and across BC.",
+      description:
+        "Whether you're a salaried employee, freelancer, independent contractor, or self-employed professional in British Columbia, we prepare accurate T1 personal tax returns that maximize your refund and ensure full CRA compliance. Our experienced team handles employment income, rental income, investment income, self-employment income, and all eligible deductions and credits available to BC residents.",
+      icon: "FileText",
+      included: [
+        "T1 personal income tax return preparation and filing",
+        "Self-employment and freelancer tax returns",
+        "Rental property income reporting and deductions",
+        "Investment income and capital gains reporting",
+        "RRSP, TFSA, and retirement income optimization",
+        "Previous year and amended tax return filing",
+      ],
+      whoItsFor:
+        "Individuals, independent contractors, freelancers, and self-employed professionals in Vancouver, Surrey, White Rock, and across BC who want their personal taxes filed accurately and on time by a CPA-led firm.",
+      outcomes: [
+        { title: "Maximum Refund", description: "We identify every eligible deduction and credit to ensure you keep more of your hard-earned income." },
+        { title: "CRA Compliance", description: "Accurate, timely filing that keeps you in good standing with the Canada Revenue Agency." },
+        { title: "Stress-Free Filing", description: "Hand off your personal taxes to professionals and eliminate the complexity of doing it yourself." },
       ],
     },
     {
@@ -89,7 +114,7 @@ const en = {
         "Workers\u2019 compensation and WorkSafeBC reporting",
       ],
       whoItsFor:
-        "Businesses with employees in Vancouver and BC who need dependable, accurate payroll processing without the complexity of managing it in-house.",
+        "Businesses with employees in Vancouver, Surrey, Burnaby, Coquitlam, and across BC who need dependable, accurate payroll processing without the complexity of managing it in-house.",
       outcomes: [
         { title: "Accuracy Guaranteed", description: "Precise calculations every pay period, eliminating costly errors and employee concerns." },
         { title: "Regulatory Compliance", description: "All CRA remittances filed on time with correct amounts, avoiding penalties and interest charges." },
@@ -113,7 +138,7 @@ const en = {
         "Ongoing strategic financial consultation",
       ],
       whoItsFor:
-        "Growing businesses and startup founders in Vancouver and BC who need more than bookkeeping \u2014 they need a financial partner to guide strategic decisions.",
+        "Growing businesses and startup founders in Vancouver, Surrey, Richmond, and across the Lower Mainland who need more than bookkeeping \u2014 they need a financial partner to guide strategic decisions.",
       outcomes: [
         { title: "Informed Decisions", description: "Clear financial insights and reporting that drive smarter business decisions." },
         { title: "Growth Planning", description: "Budgets, forecasts, and KPIs that help you plan for sustainable, profitable growth." },
@@ -122,10 +147,10 @@ const en = {
     },
   ],
   whyUs: {
-    heading: "Why Vancouver Businesses Choose CloudKeeping",
-    subheading: "We go beyond the numbers to deliver accounting services you can rely on.",
+    heading: "Why Vancouver & Lower Mainland Businesses Choose CloudKeeping",
+    subheading: "We go beyond the numbers to deliver accounting services you can rely on across Vancouver, Surrey, White Rock, and BC.",
     items: [
-      { title: "CRA Compliance-Focused", description: "We stay current with Canadian tax regulations and CRA filing requirements so you never have to worry about penalties or missed deadlines.", icon: "ShieldCheck" },
+      { title: "CPA-Led, CRA Compliance-Focused", description: "Led by a Chartered Professional Accountant, we stay current with Canadian tax regulations and CRA filing requirements so you never have to worry about penalties or missed deadlines.", icon: "ShieldCheck" },
       { title: "Proactive Tax & Financial Support", description: "We don\u2019t just react to problems \u2014 we anticipate them. From tax planning to cash flow forecasting, we keep your BC business one step ahead.", icon: "Lightbulb" },
       { title: "Clear Communication", description: "No jargon, no surprises. We explain your financial position in plain language and are always available when you have questions.", icon: "MessageSquare" },
       { title: "Cloud-Based Technology", description: "We leverage QuickBooks, Xero, and modern cloud-based tools to deliver faster, more accurate results with secure, real-time access to your data.", icon: "Cloud" },
@@ -165,13 +190,14 @@ const en = {
     stillSubtitle: "We\u2019re happy to help. Reach out and we\u2019ll get back to you within one business day.",
     contactUs: "Contact Us",
     items: [
-      { question: "What types of businesses do you work with in Vancouver?", answer: "We work primarily with small and medium-sized businesses, incorporated professionals, and independent contractors across Vancouver and British Columbia. Our clients span industries including professional services, construction, technology, retail, healthcare, and real estate. If you\u2019re unsure whether we\u2019re the right fit, book a free consultation \u2014 there\u2019s no obligation.", category: "General" },
+      { question: "What types of businesses do you work with in Vancouver and Surrey?", answer: "We work primarily with small and medium-sized businesses, incorporated professionals, and independent contractors across Vancouver, Surrey, White Rock, Burnaby, Coquitlam, Richmond, and all of British Columbia. Our clients span industries including professional services, construction, technology, retail, healthcare, and real estate. If you\u2019re unsure whether we\u2019re the right fit, book a free consultation \u2014 there\u2019s no obligation.", category: "General" },
       { question: "How do I get started with a bookkeeper in Vancouver?", answer: "Getting started is straightforward. Book a free consultation through our contact form, WhatsApp, or phone. During the consultation, we\u2019ll review your current financial situation, understand your needs, and recommend the bookkeeping and accounting services that make sense for your business. From there, we handle the onboarding process and get you set up quickly.", category: "General" },
       { question: "What accounting software do you support?", answer: "We work with industry-leading cloud-based accounting platforms including QuickBooks Online, Xero, and Sage. If you already use a specific platform, we\u2019re happy to work within your existing setup. If you\u2019re starting fresh, we\u2019ll recommend the best cloud accounting option based on your business needs and budget.", category: "General" },
       { question: "How often will I receive financial reports?", answer: "We provide monthly financial statements as part of our standard bookkeeping service, including a profit and loss statement, balance sheet, and cash flow summary. For consulting clients, we offer more frequent reporting and custom dashboards tailored to the KPIs that matter most to your business.", category: "Services" },
       { question: "Can you help with CRA audits or tax disputes?", answer: "Absolutely. If you receive a notice from the CRA, we review the correspondence, prepare the necessary documentation, and represent your interests. Our proactive approach to Canadian tax compliance means our clients are well-positioned in the event of a review or audit.", category: "Services" },
       { question: "How much do bookkeeping and accounting services cost in Vancouver?", answer: "Our fees depend on the scope and complexity of the services you need. We offer transparent, fixed-fee pricing for most of our core bookkeeping, tax, and payroll services so you always know what to expect. During your initial consultation, we\u2019ll provide a clear quote based on your specific requirements \u2014 no hidden charges.", category: "Pricing" },
-      { question: "Do you offer virtual bookkeeping services across BC?", answer: "Yes. All of our bookkeeping, tax, and accounting services are available remotely across British Columbia. We use secure cloud-based tools for document sharing, communication, and collaboration, which means you get the same level of service whether you\u2019re in Vancouver, Victoria, Kelowna, or anywhere in BC.", category: "General" },
+      { question: "Do you offer virtual bookkeeping services across BC?", answer: "Yes. All of our bookkeeping, tax, and accounting services are available remotely across British Columbia. We use secure cloud-based tools for document sharing, communication, and collaboration, which means you get the same level of service whether you\u2019re in Vancouver, Surrey, White Rock, Victoria, Kelowna, or anywhere in BC.", category: "General" },
+      { question: "Do you prepare personal tax returns (T1) in Vancouver?", answer: "Yes. We prepare T1 personal income tax returns for individuals, freelancers, independent contractors, and self-employed professionals across Vancouver, Surrey, White Rock, and all of BC. We handle employment income, rental income, investment income, self-employment income, and ensure you claim every eligible deduction and credit. Visit our personal tax services page for more details.", category: "Services" },
       { question: "What\u2019s the difference between bookkeeping and accounting?", answer: "Bookkeeping focuses on the day-to-day recording of financial transactions \u2014 categorizing expenses, reconciling bank statements, and maintaining accurate records. Accounting goes further, involving analysis, reporting, tax planning, and strategic financial advice. Most BC businesses benefit from both, and we offer integrated services that cover the full spectrum.", category: "Services" },
       { question: "How do you keep my financial data secure?", answer: "Data security is a top priority. We use encrypted, cloud-based platforms with bank-level security, multi-factor authentication, and role-based access controls. We follow Canadian data protection best practices and never share your information with unauthorized third parties.", category: "General" },
       { question: "Can I switch to CloudKeeping from another accountant or bookkeeper?", answer: "Absolutely, and we make the transition as smooth as possible. We\u2019ll coordinate with your previous provider to obtain your financial records, review your current books for accuracy, and handle the entire migration process. Most transitions for Vancouver-area businesses are completed within one to two weeks.", category: "General" },
@@ -181,8 +207,8 @@ const en = {
     pageTitle: "About CloudKeeping \u2014 Vancouver Accountants & Bookkeepers",
     pageSubtitle: "Professional accounting and bookkeeping services in Vancouver, BC \u2014 built on accuracy, transparency, and a commitment to your success.",
     storyTitle: "Our Story",
-    story: "CloudKeeping was founded in British Columbia with a clear mission: to provide small and medium-sized businesses with the same caliber of accounting and bookkeeping services that large corporations take for granted. We believe that every business in Vancouver and across BC \u2014 regardless of size \u2014 deserves accurate books, proactive tax planning, and a trusted financial partner.",
-    storyExtended: "Based in Vancouver, BC, our team brings over a decade of experience in Canadian accounting, tax planning, and business advisory. We\u2019ve built our practice on the principles of accuracy, CRA compliance, and client-first service \u2014 and we measure our success by the success of the businesses we support across British Columbia.",
+    story: "CloudKeeping was founded in British Columbia with a clear mission: to provide small and medium-sized businesses with the same caliber of CPA-led accounting and bookkeeping services that large corporations take for granted. We believe that every business in Vancouver, Surrey, White Rock, and across the Lower Mainland \u2014 regardless of size \u2014 deserves accurate books, proactive tax planning, and a trusted financial partner.",
+    storyExtended: "Based in Vancouver, BC, our CPA-led team brings over a decade of experience in Canadian accounting, tax planning, and business advisory. We serve clients across Vancouver, Surrey, White Rock, Burnaby, Richmond, Coquitlam, and all of British Columbia. We\u2019ve built our practice on the principles of accuracy, CRA compliance, and client-first service \u2014 and we measure our success by the success of the businesses we support.",
     valuesHeading: "Our Values",
     valuesSubheading: "The principles that guide every engagement and every decision we make for our BC clients.",
     values: [
@@ -201,14 +227,14 @@ const en = {
   },
   contact: {
     pageTitle: "Contact CloudKeeping \u2014 Vancouver Bookkeeper & Accountant",
-    pageSubtitle: "Ready to take the next step? Send us a message or reach out directly. We serve businesses across Vancouver and British Columbia and typically respond within one business day.",
+    pageSubtitle: "Ready to take the next step? Send us a message or reach out directly. We serve businesses across Vancouver, Surrey, White Rock, Burnaby, and all of British Columbia. We typically respond within one business day.",
     formTitle: "Send Us a Message",
     infoTitle: "Contact Information",
     phoneLabel: "Phone / WhatsApp",
     emailLabel: "Email",
     hoursLabel: "Office Hours",
     areaLabel: "Service Area",
-    areaNote: "All bookkeeping and accounting services available remotely across BC",
+    areaNote: "Serving Vancouver, Surrey, White Rock, Burnaby, Richmond, Coquitlam, and all of BC \u2014 in-person and remotely",
     mapTitle: "Our Location \u2014 Vancouver, BC",
     whatToExpect: "What to Expect",
     expectations: [
@@ -282,8 +308,8 @@ const en = {
     subtitle: "We\u2019d love to learn about your business and discuss how CloudKeeping can help you grow in BC.",
   },
   metadata: {
-    title: "CloudKeeping \u2014 Bookkeeping, Tax & Accounting Services in Vancouver, BC",
-    description: "CloudKeeping provides professional bookkeeping, tax planning, payroll, and accounting services for small businesses, contractors, and incorporated professionals in Vancouver and British Columbia, Canada. CRA-compliant. Free consultation.",
+    title: "Bookkeeping, Tax & Accounting Services in Vancouver, BC",
+    description: "CloudKeeping is a CPA-led firm providing professional bookkeeping, tax planning, payroll, and accounting services for small businesses, contractors, and incorporated professionals in Vancouver, Surrey, White Rock, and across British Columbia, Canada. CRA-compliant. Free consultation.",
   },
 };
 

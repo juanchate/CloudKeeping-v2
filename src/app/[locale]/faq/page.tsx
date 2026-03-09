@@ -31,7 +31,6 @@ export default async function FAQPage({ params }: Props) {
   const categories = [...new Set(f.items.map((q) => q.category))];
   const grouped = categories.map((cat) => ({ category: cat, items: f.items.filter((q) => q.category === cat) }));
 
-  // FAQPage structured data
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -46,9 +45,19 @@ export default async function FAQPage({ params }: Props) {
     })),
   };
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: d.nav.home, item: `${SITE_URL}/${locale}` },
+      { "@type": "ListItem", position: 2, name: d.nav.faq, item: `${SITE_URL}/${locale}/faq` },
+    ],
+  };
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       <section className="bg-gradient-to-b from-surface to-white py-16 lg:py-20">
         <Container><div className="mx-auto max-w-2xl text-center">

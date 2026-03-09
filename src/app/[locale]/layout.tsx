@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: {
-      default: dict.metadata.title,
+      default: `${dict.metadata.title} | ${SITE_NAME}`,
       template: `%s | ${SITE_NAME}`,
     },
     description: dict.metadata.description,
