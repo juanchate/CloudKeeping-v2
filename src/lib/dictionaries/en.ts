@@ -51,26 +51,26 @@ const en = {
     },
     {
       slug: "tax",
-      title: "Tax Planning & Preparation",
+      title: "Corporate Tax Planning & T2 Preparation",
       shortDescription:
-        "Proactive tax strategy for businesses and contractors in BC. Minimize your CRA tax burden and stay fully compliant.",
+        "Expert T2 corporate tax return preparation and proactive tax planning for incorporated businesses and contractors in Vancouver, Surrey, and across BC. Minimize your CRA tax burden and stay fully compliant.",
       description:
-        "We go beyond simple tax filing. Our experienced team develops proactive tax strategies tailored to your business structure and goals \u2014 whether you\u2019re an incorporated professional, contractor, or SMB owner in British Columbia. We ensure you take advantage of every legitimate deduction and credit while staying fully compliant with CRA requirements.",
+        "Corporate tax is at the core of what we do. Our experienced team prepares T2 corporate tax returns and develops proactive tax strategies tailored to your business structure and goals \u2014 whether you\u2019re an incorporated professional, contractor, or SMB owner in British Columbia. From corporate tax optimization and GST/HST compliance to CRA audit support, we ensure your business takes advantage of every legitimate deduction and credit while staying fully compliant.",
       icon: "Calculator",
       included: [
-        "Corporate (T2) and personal (T1) tax return preparation",
-        "GST/PST return filing and compliance",
-        "Tax planning and optimization strategies",
+        "T2 corporate tax return preparation and filing",
+        "Corporate tax planning and optimization strategies",
+        "GST/HST and PST return filing and compliance",
         "CRA correspondence, notices, and audit support",
         "Installment payment calculations and reminders",
-        "Year-round tax advisory and compliance monitoring",
+        "Year-round corporate tax advisory and compliance monitoring",
       ],
       whoItsFor:
-        "Incorporated professionals, independent contractors, and business owners in Vancouver, Surrey, White Rock, and across BC who want to minimize their tax burden while maintaining full CRA compliance.",
+        "Incorporated professionals, independent contractors, and business owners in Vancouver, Surrey, White Rock, and across BC who need expert T2 corporate tax preparation and want to minimize their tax burden while maintaining full CRA compliance.",
       outcomes: [
-        { title: "Reduced Tax Burden", description: "Strategic planning that identifies legitimate deductions and credits specific to BC businesses." },
-        { title: "Full CRA Compliance", description: "Never worry about missed deadlines, incorrect filings, or CRA penalties again." },
-        { title: "Peace of Mind", description: "Confidence that your tax affairs are managed by experienced Canadian tax professionals who stay current with tax law." },
+        { title: "Reduced Corporate Tax Burden", description: "Strategic T2 planning that identifies legitimate deductions and credits specific to BC businesses and corporations." },
+        { title: "Full CRA Compliance", description: "Never worry about missed T2 deadlines, incorrect filings, or CRA penalties again." },
+        { title: "Peace of Mind", description: "Confidence that your corporate tax affairs are managed by experienced Canadian tax professionals who stay current with tax law." },
       ],
     },
     {

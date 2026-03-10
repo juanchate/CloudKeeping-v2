@@ -51,26 +51,26 @@ const es = {
     },
     {
       slug: "tax",
-      title: "Planificaci\u00f3n y Preparaci\u00f3n Fiscal",
+      title: "Planificación Fiscal Corporativa y Declaración T2",
       shortDescription:
-        "Estrategia fiscal proactiva para negocios y contratistas en BC. Minimiza tu carga ante la CRA y mant\u00e9n el cumplimiento total.",
+        "Preparación experta de declaraciones T2 de impuestos corporativos y planificación fiscal proactiva para empresas incorporadas y contratistas en Vancouver, Surrey y toda BC. Minimiza tu carga ante la CRA.",
       description:
-        "Vamos m\u00e1s all\u00e1 de la simple declaraci\u00f3n de impuestos. Nuestro equipo experimentado desarrolla estrategias fiscales proactivas adaptadas a tu estructura y objetivos \u2014 ya seas profesional incorporado, contratista o due\u00f1o de PYME en British Columbia. Aseguramos que aproveches cada deducci\u00f3n y cr\u00e9dito leg\u00edtimo cumpliendo plenamente con la CRA.",
+        "Los impuestos corporativos son el centro de lo que hacemos. Nuestro equipo experimentado prepara declaraciones T2 de impuestos corporativos y desarrolla estrategias fiscales proactivas adaptadas a tu estructura y objetivos — ya seas profesional incorporado, contratista o dueño de PYME en British Columbia. Desde la optimización fiscal corporativa y el cumplimiento de GST/HST hasta el soporte en auditorías de la CRA, aseguramos que tu empresa aproveche cada deducción y crédito legítimo cumpliendo plenamente.",
       icon: "Calculator",
       included: [
-        "Preparaci\u00f3n de declaraciones corporativas (T2) y personales (T1)",
-        "Declaraci\u00f3n y cumplimiento de GST/PST",
-        "Estrategias de planificaci\u00f3n y optimizaci\u00f3n fiscal",
+        "Preparación y presentación de declaraciones T2 de impuestos corporativos",
+        "Planificación y optimización fiscal corporativa",
+        "Declaración y cumplimiento de GST/HST y PST",
         "Correspondencia con la CRA, avisos y soporte en auditorías",
-        "C\u00e1lculo y recordatorios de pagos a cuenta",
-        "Asesor\u00eda fiscal y monitoreo de cumplimiento durante todo el a\u00f1o",
+        "Cálculo y recordatorios de pagos a cuenta",
+        "Asesoría fiscal corporativa y monitoreo de cumplimiento durante todo el año",
       ],
       whoItsFor:
-        "Profesionales incorporados, contratistas independientes y dueños de negocios en Vancouver, Surrey, White Rock y toda BC que desean minimizar su carga fiscal manteniendo pleno cumplimiento con la CRA.",
+        "Profesionales incorporados, contratistas independientes y dueños de negocios en Vancouver, Surrey, White Rock y toda BC que necesitan preparación experta de declaraciones T2 y quieren minimizar su carga fiscal corporativa manteniendo pleno cumplimiento con la CRA.",
       outcomes: [
-        { title: "Menor Carga Fiscal", description: "Planificaci\u00f3n estrat\u00e9gica que identifica deducciones y cr\u00e9ditos leg\u00edtimos espec\u00edficos para negocios en BC." },
-        { title: "Cumplimiento Total con la CRA", description: "Nunca m\u00e1s te preocupes por plazos perdidos, declaraciones incorrectas o multas de la CRA." },
-        { title: "Tranquilidad", description: "Confianza en que tus asuntos fiscales están gestionados por profesionales fiscales canadienses experimentados." },
+        { title: "Menor Carga Fiscal Corporativa", description: "Planificación estratégica T2 que identifica deducciones y créditos legítimos específicos para negocios y corporaciones en BC." },
+        { title: "Cumplimiento Total con la CRA", description: "Nunca más te preocupes por plazos T2 perdidos, declaraciones incorrectas o multas de la CRA." },
+        { title: "Tranquilidad", description: "Confianza en que tus asuntos fiscales corporativos están gestionados por profesionales fiscales canadienses experimentados y actualizados con la ley fiscal." },
       ],
     },
     {

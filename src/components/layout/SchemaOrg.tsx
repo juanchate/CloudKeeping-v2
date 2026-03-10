@@ -58,7 +58,7 @@ export function SchemaOrg({ locale = "en" }: SchemaOrgProps) {
       name: locale === "es" ? "Servicios Contables" : "Accounting Services",
       itemListElement: [
         { "@type": "Offer", itemOffered: { "@type": "Service", name: "Bookkeeping", url: `${SITE_URL}/${locale}/services/bookkeeping` } },
-        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Tax Planning & Preparation", url: `${SITE_URL}/${locale}/services/tax` } },
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Corporate Tax Planning & T2 Preparation", url: `${SITE_URL}/${locale}/services/tax` } },
         { "@type": "Offer", itemOffered: { "@type": "Service", name: "Personal Tax Filing", url: `${SITE_URL}/${locale}/services/personal-tax` } },
         { "@type": "Offer", itemOffered: { "@type": "Service", name: "Payroll Services", url: `${SITE_URL}/${locale}/services/payroll` } },
         { "@type": "Offer", itemOffered: { "@type": "Service", name: "Accounting & Financial Consulting", url: `${SITE_URL}/${locale}/services/accounting-consulting` } },
