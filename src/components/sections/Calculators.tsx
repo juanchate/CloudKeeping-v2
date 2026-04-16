@@ -3,10 +3,226 @@
 import { useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
 
-const fmt = (n: number) =>
-  n.toLocaleString("en-CA", { style: "currency", currency: "CAD", maximumFractionDigits: 0 });
-const fmtDecimal = (n: number, decimals = 2) =>
-  n.toLocaleString("en-CA", { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+type LocaleKey = "en" | "es";
+
+const fmtLocale = (locale: LocaleKey) => (n: number) =>
+  n.toLocaleString(locale === "es" ? "es-CA" : "en-CA", {
+    style: "currency",
+    currency: "CAD",
+    maximumFractionDigits: 0,
+  });
+const fmtDecimalLocale = (locale: LocaleKey) => (n: number, decimals = 2) =>
+  n.toLocaleString(locale === "es" ? "es-CA" : "en-CA", {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
+  });
+
+const CALC_T = {
+  en: {
+    // Breakeven
+    fixedCosts: "Fixed Costs (per period)",
+    pricePerUnit: "Price per Unit",
+    variableCost: "Variable Cost per Unit",
+    contribMargin: "Contribution Margin / Unit",
+    contribMarginPct: "Contribution Margin %",
+    breakevenUnits: "Break-Even Units",
+    breakevenRevenue: "Break-Even Revenue",
+    // Loan
+    principal: "Principal",
+    annualRate: "Annual Interest Rate",
+    termYears: "Term (years)",
+    paymentsPerYear: "Payments per Year",
+    paymentAmount: "Payment Amount",
+    totalInterest: "Total Interest",
+    totalPaid: "Total Amount Paid",
+    totalPayments: "Total Payments",
+    freqMonthly: "Monthly (12)",
+    freqBiweekly: "Bi-weekly (26)",
+    freqWeekly: "Weekly (52)",
+    freqSemi: "Semi-monthly (24)",
+    schedule: (n: number) => `Amortization Schedule (first ${n} payments)`,
+    payment: "Payment",
+    interest: "Interest",
+    principalCol: "Principal",
+    balance: "Balance",
+    // RRSP vs TFSA
+    contribAmt: "Contribution Amount (pre-tax $)",
+    mNow: "Marginal Tax Rate NOW",
+    mLater: "Marginal Tax Rate AT WITHDRAWAL",
+    yearsToWith: "Years to Withdrawal",
+    annualReturn: "Annual Return",
+    rrspFV: "RRSP Future Value (gross)",
+    rrspAfter: "RRSP After-Tax",
+    tfsaContrib: "TFSA Effective Contribution",
+    tfsaAfter: "TFSA After-Tax",
+    recommendation: "Recommendation",
+    tie: "Both produce the same after-tax result.",
+    winsBy: (winner: string, amount: string) => (
+      <>
+        The <strong>{winner}</strong> wins by <strong>{amount}</strong> based on your inputs.
+      </>
+    ),
+    // GST/HST
+    amount: "Amount",
+    provinceTerritory: "Province / Territory",
+    mode: "Mode",
+    addTax: "Add tax",
+    removeTax: "Remove tax",
+    preTax: (p: string) => `Pre-Tax (${p})`,
+    taxAt: (r: number) => `${r}% Tax`,
+    totalInclTax: "Total (incl. tax)",
+    // Retirement
+    currentAge: "Current Age",
+    retireAge: "Retirement Age",
+    currentSavings: "Current Savings",
+    monthlyContrib: "Monthly Contribution",
+    desiredIncome: "Desired Annual Income",
+    yearsRetirement: "Years in Retirement",
+    yearsUntil: "Years Until Retirement",
+    projSavings: "Projected Savings at Retirement",
+    capitalNeeded: "Capital Needed",
+    projSurplus: "Projected Surplus",
+    projShortfall: "Projected Shortfall",
+    shortfallMsg:
+      "You may need to increase contributions or retire later to meet your goal.",
+    // Ratios
+    currentAssets: "Current Assets",
+    currentLiab: "Current Liabilities",
+    inventory: "Inventory",
+    totalLiab: "Total Liabilities",
+    equity: "Shareholders' Equity",
+    netIncome: "Net Income",
+    revenue: "Revenue",
+    totalAssets: "Total Assets",
+    currentRatio: "Current Ratio",
+    quickRatio: "Quick Ratio",
+    debtEquity: "Debt / Equity",
+    roe: "Return on Equity",
+    roa: "Return on Assets",
+    netMargin: "Net Profit Margin",
+    // Valuation
+    annualEarnings: "Annual Earnings (EBITDA)",
+    industryMultiple: "Industry Earnings Multiple",
+    annualRevenue: "Annual Revenue",
+    revenueMultiple: "Revenue Multiple",
+    liabilities: "Total Liabilities",
+    earningsMethod: "Earnings Method",
+    revenueMethod: "Revenue Method",
+    assetMethod: "Asset-Based Method",
+    blended: "Average (Blended)",
+    valuationNote:
+      "A proper business valuation considers cash flow quality, customer concentration, growth prospects, and market conditions. Contact us for a detailed assessment.",
+    // Compound
+    initialPrincipal: "Initial Principal",
+    annualReturnRate: "Annual Return Rate",
+    years: "Years",
+    totalContrib: "Total Contributed",
+    interestEarned: "Interest Earned",
+    finalBalance: "Final Balance",
+    growthMult: "Growth Multiplier",
+    year: "Year",
+    contributed: "Contributed",
+  },
+  es: {
+    fixedCosts: "Costos Fijos (por período)",
+    pricePerUnit: "Precio por Unidad",
+    variableCost: "Costo Variable por Unidad",
+    contribMargin: "Margen de Contribución / Unidad",
+    contribMarginPct: "Margen de Contribución %",
+    breakevenUnits: "Unidades en Punto de Equilibrio",
+    breakevenRevenue: "Ingresos en Punto de Equilibrio",
+    principal: "Capital",
+    annualRate: "Tasa de Interés Anual",
+    termYears: "Plazo (años)",
+    paymentsPerYear: "Pagos por Año",
+    paymentAmount: "Monto del Pago",
+    totalInterest: "Intereses Totales",
+    totalPaid: "Monto Total Pagado",
+    totalPayments: "Total de Pagos",
+    freqMonthly: "Mensual (12)",
+    freqBiweekly: "Quincenal (26)",
+    freqWeekly: "Semanal (52)",
+    freqSemi: "Semimensual (24)",
+    schedule: (n: number) => `Tabla de Amortización (primeros ${n} pagos)`,
+    payment: "Pago",
+    interest: "Interés",
+    principalCol: "Capital",
+    balance: "Saldo",
+    contribAmt: "Monto del Aporte (antes de impuestos $)",
+    mNow: "Tasa Marginal AHORA",
+    mLater: "Tasa Marginal AL RETIRO",
+    yearsToWith: "Años hasta el Retiro",
+    annualReturn: "Retorno Anual",
+    rrspFV: "Valor Futuro RRSP (bruto)",
+    rrspAfter: "RRSP Después de Impuestos",
+    tfsaContrib: "Aporte Efectivo TFSA",
+    tfsaAfter: "TFSA Después de Impuestos",
+    recommendation: "Recomendación",
+    tie: "Ambos producen el mismo resultado después de impuestos.",
+    winsBy: (winner: string, amount: string) => (
+      <>
+        <strong>{winner}</strong> gana por <strong>{amount}</strong> según tus datos.
+      </>
+    ),
+    amount: "Monto",
+    provinceTerritory: "Provincia / Territorio",
+    mode: "Modo",
+    addTax: "Agregar impuesto",
+    removeTax: "Quitar impuesto",
+    preTax: (p: string) => `Antes de impuestos (${p})`,
+    taxAt: (r: number) => `Impuesto ${r}%`,
+    totalInclTax: "Total (con impuesto)",
+    currentAge: "Edad Actual",
+    retireAge: "Edad de Retiro",
+    currentSavings: "Ahorros Actuales",
+    monthlyContrib: "Aporte Mensual",
+    desiredIncome: "Ingreso Anual Deseado",
+    yearsRetirement: "Años en Retiro",
+    yearsUntil: "Años Hasta el Retiro",
+    projSavings: "Ahorros Proyectados al Retiro",
+    capitalNeeded: "Capital Necesario",
+    projSurplus: "Superávit Proyectado",
+    projShortfall: "Déficit Proyectado",
+    shortfallMsg:
+      "Podrías necesitar aumentar los aportes o retirarte más tarde para alcanzar tu meta.",
+    currentAssets: "Activos Corrientes",
+    currentLiab: "Pasivos Corrientes",
+    inventory: "Inventario",
+    totalLiab: "Pasivos Totales",
+    equity: "Patrimonio de los Accionistas",
+    netIncome: "Utilidad Neta",
+    revenue: "Ingresos",
+    totalAssets: "Activos Totales",
+    currentRatio: "Razón Corriente",
+    quickRatio: "Razón Ácida",
+    debtEquity: "Deuda / Patrimonio",
+    roe: "Retorno sobre Patrimonio",
+    roa: "Retorno sobre Activos",
+    netMargin: "Margen Neto",
+    annualEarnings: "Ganancias Anuales (EBITDA)",
+    industryMultiple: "Múltiplo de Ganancias (industria)",
+    annualRevenue: "Ingresos Anuales",
+    revenueMultiple: "Múltiplo de Ingresos",
+    liabilities: "Pasivos Totales",
+    earningsMethod: "Método de Ganancias",
+    revenueMethod: "Método de Ingresos",
+    assetMethod: "Método de Activos",
+    blended: "Promedio (Mezclado)",
+    valuationNote:
+      "Una valoración empresarial adecuada considera la calidad del flujo de caja, concentración de clientes, perspectivas de crecimiento y condiciones del mercado. Contáctanos para una evaluación detallada.",
+    initialPrincipal: "Capital Inicial",
+    annualReturnRate: "Tasa de Retorno Anual",
+    years: "Años",
+    totalContrib: "Total Aportado",
+    interestEarned: "Intereses Ganados",
+    finalBalance: "Balance Final",
+    growthMult: "Multiplicador de Crecimiento",
+    year: "Año",
+    contributed: "Aportado",
+  },
+} as const;
+
+type LocaleProp = { locale?: LocaleKey };
 
 // ---------- Shared form components ----------
 
@@ -102,9 +318,7 @@ export function ResultRow({
     <div
       className={cn(
         "flex items-baseline justify-between gap-3 rounded-lg px-4 py-3",
-        emphasized
-          ? "bg-accent/10 border border-accent/30"
-          : "bg-surface"
+        emphasized ? "bg-accent/10 border border-accent/30" : "bg-surface"
       )}
     >
       <span className={cn("text-sm", emphasized ? "font-semibold text-foreground" : "text-muted")}>{label}</span>
@@ -117,7 +331,10 @@ export function ResultRow({
 
 // ---------- 1. Breakeven Analysis ----------
 
-export function BreakevenCalculator() {
+export function BreakevenCalculator({ locale = "en" }: LocaleProp) {
+  const t = CALC_T[locale];
+  const fmt = fmtLocale(locale);
+  const fmtDecimal = fmtDecimalLocale(locale);
   const [fixedCosts, setFixedCosts] = useState("50000");
   const [pricePerUnit, setPricePerUnit] = useState("100");
   const [variableCostPerUnit, setVariableCostPerUnit] = useState("40");
@@ -133,15 +350,15 @@ export function BreakevenCalculator() {
   return (
     <div className="grid gap-8 lg:grid-cols-[1fr_1.1fr]">
       <div className="space-y-4">
-        <Field label="Fixed Costs (per period)" value={fixedCosts} onChange={setFixedCosts} prefix="$" />
-        <Field label="Price per Unit" value={pricePerUnit} onChange={setPricePerUnit} prefix="$" />
-        <Field label="Variable Cost per Unit" value={variableCostPerUnit} onChange={setVariableCostPerUnit} prefix="$" />
+        <Field label={t.fixedCosts} value={fixedCosts} onChange={setFixedCosts} prefix="$" />
+        <Field label={t.pricePerUnit} value={pricePerUnit} onChange={setPricePerUnit} prefix="$" />
+        <Field label={t.variableCost} value={variableCostPerUnit} onChange={setVariableCostPerUnit} prefix="$" />
       </div>
       <div className="space-y-3">
-        <ResultRow label="Contribution Margin / Unit" value={fmt(contribMargin)} />
-        <ResultRow label="Contribution Margin %" value={`${fmtDecimal(marginPct, 1)}%`} />
-        <ResultRow label="Break-Even Units" value={breakevenUnits.toLocaleString()} emphasized />
-        <ResultRow label="Break-Even Revenue" value={fmt(breakevenRevenue)} emphasized />
+        <ResultRow label={t.contribMargin} value={fmt(contribMargin)} />
+        <ResultRow label={t.contribMarginPct} value={`${fmtDecimal(marginPct, 1)}%`} />
+        <ResultRow label={t.breakevenUnits} value={breakevenUnits.toLocaleString()} emphasized />
+        <ResultRow label={t.breakevenRevenue} value={fmt(breakevenRevenue)} emphasized />
       </div>
     </div>
   );
@@ -149,11 +366,13 @@ export function BreakevenCalculator() {
 
 // ---------- 2. Loan Amortization ----------
 
-export function LoanAmortizationCalculator() {
+export function LoanAmortizationCalculator({ locale = "en" }: LocaleProp) {
+  const t = CALC_T[locale];
+  const fmt = fmtLocale(locale);
   const [principal, setPrincipal] = useState("300000");
   const [rate, setRate] = useState("5.5");
   const [term, setTerm] = useState("25");
-  const [freq, setFreq] = useState("12"); // payments per year
+  const [freq, setFreq] = useState("12");
 
   const p = Number(principal) || 0;
   const r = (Number(rate) || 0) / 100;
@@ -169,7 +388,6 @@ export function LoanAmortizationCalculator() {
   const totalPaid = payment * periods;
   const totalInterest = totalPaid - p;
 
-  // Generate schedule for first 12 periods
   const schedule = useMemo(() => {
     const rows: Array<{
       period: number;
@@ -198,41 +416,41 @@ export function LoanAmortizationCalculator() {
     <div>
       <div className="grid gap-8 lg:grid-cols-[1fr_1.1fr]">
         <div className="space-y-4">
-          <Field label="Principal" value={principal} onChange={setPrincipal} prefix="$" />
-          <Field label="Annual Interest Rate" value={rate} onChange={setRate} suffix="%" />
-          <Field label="Term (years)" value={term} onChange={setTerm} />
+          <Field label={t.principal} value={principal} onChange={setPrincipal} prefix="$" />
+          <Field label={t.annualRate} value={rate} onChange={setRate} suffix="%" />
+          <Field label={t.termYears} value={term} onChange={setTerm} />
           <Select
-            label="Payments per Year"
+            label={t.paymentsPerYear}
             value={freq}
             onChange={setFreq}
             options={[
-              { value: "12", label: "Monthly (12)" },
-              { value: "26", label: "Bi-weekly (26)" },
-              { value: "52", label: "Weekly (52)" },
-              { value: "24", label: "Semi-monthly (24)" },
+              { value: "12", label: t.freqMonthly },
+              { value: "26", label: t.freqBiweekly },
+              { value: "52", label: t.freqWeekly },
+              { value: "24", label: t.freqSemi },
             ]}
           />
         </div>
         <div className="space-y-3">
-          <ResultRow label="Payment Amount" value={fmt(payment)} emphasized />
-          <ResultRow label="Total Interest" value={fmt(totalInterest)} />
-          <ResultRow label="Total Amount Paid" value={fmt(totalPaid)} />
-          <ResultRow label="Total Payments" value={periods.toLocaleString()} />
+          <ResultRow label={t.paymentAmount} value={fmt(payment)} emphasized />
+          <ResultRow label={t.totalInterest} value={fmt(totalInterest)} />
+          <ResultRow label={t.totalPaid} value={fmt(totalPaid)} />
+          <ResultRow label={t.totalPayments} value={periods.toLocaleString()} />
         </div>
       </div>
 
       {schedule.length > 0 && (
         <div className="mt-8">
-          <h4 className="mb-3 text-sm font-semibold text-foreground">Amortization Schedule (first {schedule.length} payments)</h4>
+          <h4 className="mb-3 text-sm font-semibold text-foreground">{t.schedule(schedule.length)}</h4>
           <div className="overflow-x-auto rounded-lg border border-border">
             <table className="min-w-full text-sm">
               <thead className="bg-surface text-xs uppercase tracking-wider text-muted">
                 <tr>
                   <th className="px-4 py-2.5 text-left">#</th>
-                  <th className="px-4 py-2.5 text-right">Payment</th>
-                  <th className="px-4 py-2.5 text-right">Interest</th>
-                  <th className="px-4 py-2.5 text-right">Principal</th>
-                  <th className="px-4 py-2.5 text-right">Balance</th>
+                  <th className="px-4 py-2.5 text-right">{t.payment}</th>
+                  <th className="px-4 py-2.5 text-right">{t.interest}</th>
+                  <th className="px-4 py-2.5 text-right">{t.principalCol}</th>
+                  <th className="px-4 py-2.5 text-right">{t.balance}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-border">
@@ -256,7 +474,9 @@ export function LoanAmortizationCalculator() {
 
 // ---------- 3. RRSP vs TFSA ----------
 
-export function RRSPvsTFSACalculator() {
+export function RRSPvsTFSACalculator({ locale = "en" }: LocaleProp) {
+  const t = CALC_T[locale];
+  const fmt = fmtLocale(locale);
   const [contribution, setContribution] = useState("6000");
   const [marginalNow, setMarginalNow] = useState("35");
   const [marginalLater, setMarginalLater] = useState("25");
@@ -269,44 +489,34 @@ export function RRSPvsTFSACalculator() {
   const y = Number(years) || 0;
   const r = (Number(rate) || 0) / 100;
 
-  // TFSA: contribution with after-tax dollars, grows tax-free, withdrawn tax-free
-  // Assume same after-tax cost; so TFSA contribution = c * (1 - mNow) if RRSP contribution is c
-  // Actually, standard comparison: same upfront dollar amount invested
   const growth = Math.pow(1 + r, y);
   const rrspFuture = c * growth;
   const rrspAfterTax = rrspFuture * (1 - mLater);
   const tfsaAfterTaxContrib = c * (1 - mNow);
   const tfsaFuture = tfsaAfterTaxContrib * growth;
 
-  const better = rrspAfterTax > tfsaFuture ? "RRSP" : tfsaFuture > rrspAfterTax ? "TFSA" : "Tie";
+  const better: "RRSP" | "TFSA" | "tie" =
+    rrspAfterTax > tfsaFuture ? "RRSP" : tfsaFuture > rrspAfterTax ? "TFSA" : "tie";
 
   return (
     <div className="grid gap-8 lg:grid-cols-[1fr_1.1fr]">
       <div className="space-y-4">
-        <Field label="Contribution Amount (pre-tax $)" value={contribution} onChange={setContribution} prefix="$" />
-        <Field label="Marginal Tax Rate NOW" value={marginalNow} onChange={setMarginalNow} suffix="%" />
-        <Field label="Marginal Tax Rate AT WITHDRAWAL" value={marginalLater} onChange={setMarginalLater} suffix="%" />
-        <Field label="Years to Withdrawal" value={years} onChange={setYears} />
-        <Field label="Annual Return" value={rate} onChange={setRate} suffix="%" />
+        <Field label={t.contribAmt} value={contribution} onChange={setContribution} prefix="$" />
+        <Field label={t.mNow} value={marginalNow} onChange={setMarginalNow} suffix="%" />
+        <Field label={t.mLater} value={marginalLater} onChange={setMarginalLater} suffix="%" />
+        <Field label={t.yearsToWith} value={years} onChange={setYears} />
+        <Field label={t.annualReturn} value={rate} onChange={setRate} suffix="%" />
       </div>
       <div className="space-y-3">
-        <ResultRow label="RRSP Future Value (gross)" value={fmt(rrspFuture)} />
-        <ResultRow label="RRSP After-Tax" value={fmt(rrspAfterTax)} emphasized={better === "RRSP"} />
-        <ResultRow label="TFSA Effective Contribution" value={fmt(tfsaAfterTaxContrib)} />
-        <ResultRow label="TFSA After-Tax" value={fmt(tfsaFuture)} emphasized={better === "TFSA"} />
+        <ResultRow label={t.rrspFV} value={fmt(rrspFuture)} />
+        <ResultRow label={t.rrspAfter} value={fmt(rrspAfterTax)} emphasized={better === "RRSP"} />
+        <ResultRow label={t.tfsaContrib} value={fmt(tfsaAfterTaxContrib)} />
+        <ResultRow label={t.tfsaAfter} value={fmt(tfsaFuture)} emphasized={better === "TFSA"} />
         <div className="rounded-lg border border-accent/30 bg-accent/5 p-4 text-sm text-foreground">
-          <div className="mb-1 text-xs font-semibold uppercase text-accent">Recommendation</div>
-          {better === "Tie" ? (
-            <span>Both produce the same after-tax result.</span>
-          ) : (
-            <span>
-              The <strong>{better}</strong> wins by{" "}
-              <strong>
-                {fmt(Math.abs(rrspAfterTax - tfsaFuture))}
-              </strong>{" "}
-              based on your inputs.
-            </span>
-          )}
+          <div className="mb-1 text-xs font-semibold uppercase text-accent">{t.recommendation}</div>
+          {better === "tie"
+            ? t.tie
+            : t.winsBy(better, fmt(Math.abs(rrspAfterTax - tfsaFuture)))}
         </div>
       </div>
     </div>
@@ -320,7 +530,9 @@ const GST_RATES: Record<string, number> = {
   ON: 13, PE: 15, QC: 5, SK: 5, YT: 5,
 };
 
-export function GSTHSTCalculator() {
+export function GSTHSTCalculator({ locale = "en" }: LocaleProp) {
+  const t = CALC_T[locale];
+  const fmt = fmtLocale(locale);
   const [amount, setAmount] = useState("1000");
   const [province, setProvince] = useState("BC");
   const [mode, setMode] = useState<"add" | "remove">("add");
@@ -345,19 +557,19 @@ export function GSTHSTCalculator() {
   return (
     <div className="grid gap-8 lg:grid-cols-[1fr_1.1fr]">
       <div className="space-y-4">
-        <Field label="Amount" value={amount} onChange={setAmount} prefix="$" />
+        <Field label={t.amount} value={amount} onChange={setAmount} prefix="$" />
         <Select
-          label="Province / Territory"
+          label={t.provinceTerritory}
           value={province}
           onChange={setProvince}
           options={Object.keys(GST_RATES).map((k) => ({ value: k, label: `${k} — ${GST_RATES[k]}%` }))}
         />
         <div>
-          <span className="mb-1.5 block text-xs font-medium text-muted">Mode</span>
+          <span className="mb-1.5 block text-xs font-medium text-muted">{t.mode}</span>
           <div className="grid grid-cols-2 gap-2 rounded-lg border border-border bg-white p-1">
             {[
-              { id: "add", label: "Add tax" },
-              { id: "remove", label: "Remove tax" },
+              { id: "add", label: t.addTax },
+              { id: "remove", label: t.removeTax },
             ].map((o) => (
               <button
                 key={o.id}
@@ -376,9 +588,9 @@ export function GSTHSTCalculator() {
         </div>
       </div>
       <div className="space-y-3">
-        <ResultRow label={`Pre-Tax (${province})`} value={fmt(base)} />
-        <ResultRow label={`${GST_RATES[province]}% Tax`} value={fmt(tax)} emphasized />
-        <ResultRow label="Total (incl. tax)" value={fmt(total)} />
+        <ResultRow label={t.preTax(province)} value={fmt(base)} />
+        <ResultRow label={t.taxAt(GST_RATES[province])} value={fmt(tax)} emphasized />
+        <ResultRow label={t.totalInclTax} value={fmt(total)} />
       </div>
     </div>
   );
@@ -386,7 +598,9 @@ export function GSTHSTCalculator() {
 
 // ---------- 5. Retirement Planning ----------
 
-export function RetirementCalculator() {
+export function RetirementCalculator({ locale = "en" }: LocaleProp) {
+  const t = CALC_T[locale];
+  const fmt = fmtLocale(locale);
   const [currentAge, setCurrentAge] = useState("35");
   const [retireAge, setRetireAge] = useState("65");
   const [currentSavings, setCurrentSavings] = useState("25000");
@@ -413,27 +627,25 @@ export function RetirementCalculator() {
   return (
     <div className="grid gap-8 lg:grid-cols-[1fr_1.1fr]">
       <div className="grid grid-cols-2 gap-4">
-        <Field label="Current Age" value={currentAge} onChange={setCurrentAge} />
-        <Field label="Retirement Age" value={retireAge} onChange={setRetireAge} />
-        <Field label="Current Savings" value={currentSavings} onChange={setCurrentSavings} prefix="$" />
-        <Field label="Monthly Contribution" value={monthlyContrib} onChange={setMonthlyContrib} prefix="$" />
-        <Field label="Annual Return" value={rate} onChange={setRate} suffix="%" />
-        <Field label="Desired Annual Income" value={desiredIncome} onChange={setDesiredIncome} prefix="$" />
-        <Field label="Years in Retirement" value={yearsInRetirement} onChange={setYearsInRetirement} />
+        <Field label={t.currentAge} value={currentAge} onChange={setCurrentAge} />
+        <Field label={t.retireAge} value={retireAge} onChange={setRetireAge} />
+        <Field label={t.currentSavings} value={currentSavings} onChange={setCurrentSavings} prefix="$" />
+        <Field label={t.monthlyContrib} value={monthlyContrib} onChange={setMonthlyContrib} prefix="$" />
+        <Field label={t.annualReturn} value={rate} onChange={setRate} suffix="%" />
+        <Field label={t.desiredIncome} value={desiredIncome} onChange={setDesiredIncome} prefix="$" />
+        <Field label={t.yearsRetirement} value={yearsInRetirement} onChange={setYearsInRetirement} />
       </div>
       <div className="space-y-3">
-        <ResultRow label="Years Until Retirement" value={`${yearsToRetire}`} />
-        <ResultRow label="Projected Savings at Retirement" value={fmt(fv)} emphasized />
-        <ResultRow label="Capital Needed" value={fmt(needed)} />
+        <ResultRow label={t.yearsUntil} value={`${yearsToRetire}`} />
+        <ResultRow label={t.projSavings} value={fmt(fv)} emphasized />
+        <ResultRow label={t.capitalNeeded} value={fmt(needed)} />
         <ResultRow
-          label={surplus >= 0 ? "Projected Surplus" : "Projected Shortfall"}
+          label={surplus >= 0 ? t.projSurplus : t.projShortfall}
           value={fmt(Math.abs(surplus))}
           emphasized
         />
         {surplus < 0 && (
-          <p className="rounded-lg bg-error/10 p-3 text-xs text-error">
-            You may need to increase contributions or retire later to meet your goal.
-          </p>
+          <p className="rounded-lg bg-error/10 p-3 text-xs text-error">{t.shortfallMsg}</p>
         )}
       </div>
     </div>
@@ -442,7 +654,9 @@ export function RetirementCalculator() {
 
 // ---------- 6. Financial Ratios ----------
 
-export function FinancialRatiosCalculator() {
+export function FinancialRatiosCalculator({ locale = "en" }: LocaleProp) {
+  const t = CALC_T[locale];
+  const fmtDecimal = fmtDecimalLocale(locale);
   const [currentAssets, setCurrentAssets] = useState("250000");
   const [currentLiab, setCurrentLiab] = useState("120000");
   const [inventory, setInventory] = useState("50000");
@@ -471,22 +685,22 @@ export function FinancialRatiosCalculator() {
   return (
     <div className="grid gap-8 lg:grid-cols-[1fr_1.1fr]">
       <div className="grid grid-cols-2 gap-4">
-        <Field label="Current Assets" value={currentAssets} onChange={setCurrentAssets} prefix="$" />
-        <Field label="Current Liabilities" value={currentLiab} onChange={setCurrentLiab} prefix="$" />
-        <Field label="Inventory" value={inventory} onChange={setInventory} prefix="$" />
-        <Field label="Total Liabilities" value={totalLiab} onChange={setTotalLiab} prefix="$" />
-        <Field label="Shareholders' Equity" value={equity} onChange={setEquity} prefix="$" />
-        <Field label="Net Income" value={netIncome} onChange={setNetIncome} prefix="$" />
-        <Field label="Revenue" value={revenue} onChange={setRevenue} prefix="$" />
-        <Field label="Total Assets" value={totalAssets} onChange={setTotalAssets} prefix="$" />
+        <Field label={t.currentAssets} value={currentAssets} onChange={setCurrentAssets} prefix="$" />
+        <Field label={t.currentLiab} value={currentLiab} onChange={setCurrentLiab} prefix="$" />
+        <Field label={t.inventory} value={inventory} onChange={setInventory} prefix="$" />
+        <Field label={t.totalLiab} value={totalLiab} onChange={setTotalLiab} prefix="$" />
+        <Field label={t.equity} value={equity} onChange={setEquity} prefix="$" />
+        <Field label={t.netIncome} value={netIncome} onChange={setNetIncome} prefix="$" />
+        <Field label={t.revenue} value={revenue} onChange={setRevenue} prefix="$" />
+        <Field label={t.totalAssets} value={totalAssets} onChange={setTotalAssets} prefix="$" />
       </div>
       <div className="space-y-3">
-        <ResultRow label="Current Ratio" value={fmtDecimal(current)} emphasized={current >= 1.5} />
-        <ResultRow label="Quick Ratio" value={fmtDecimal(quick)} emphasized={quick >= 1} />
-        <ResultRow label="Debt / Equity" value={fmtDecimal(debtEquity)} />
-        <ResultRow label="Return on Equity" value={`${fmtDecimal(roe, 1)}%`} emphasized={roe >= 15} />
-        <ResultRow label="Return on Assets" value={`${fmtDecimal(roa, 1)}%`} />
-        <ResultRow label="Net Profit Margin" value={`${fmtDecimal(netMargin, 1)}%`} />
+        <ResultRow label={t.currentRatio} value={fmtDecimal(current)} emphasized={current >= 1.5} />
+        <ResultRow label={t.quickRatio} value={fmtDecimal(quick)} emphasized={quick >= 1} />
+        <ResultRow label={t.debtEquity} value={fmtDecimal(debtEquity)} />
+        <ResultRow label={t.roe} value={`${fmtDecimal(roe, 1)}%`} emphasized={roe >= 15} />
+        <ResultRow label={t.roa} value={`${fmtDecimal(roa, 1)}%`} />
+        <ResultRow label={t.netMargin} value={`${fmtDecimal(netMargin, 1)}%`} />
       </div>
     </div>
   );
@@ -494,7 +708,9 @@ export function FinancialRatiosCalculator() {
 
 // ---------- 7. Business Valuation ----------
 
-export function BusinessValuationCalculator() {
+export function BusinessValuationCalculator({ locale = "en" }: LocaleProp) {
+  const t = CALC_T[locale];
+  const fmt = fmtLocale(locale);
   const [annualEarnings, setAnnualEarnings] = useState("200000");
   const [industryMultiple, setIndustryMultiple] = useState("4");
   const [revenue, setRevenue] = useState("1500000");
@@ -517,22 +733,19 @@ export function BusinessValuationCalculator() {
   return (
     <div className="grid gap-8 lg:grid-cols-[1fr_1.1fr]">
       <div className="grid grid-cols-2 gap-4">
-        <Field label="Annual Earnings (EBITDA)" value={annualEarnings} onChange={setAnnualEarnings} prefix="$" />
-        <Field label="Industry Earnings Multiple" value={industryMultiple} onChange={setIndustryMultiple} suffix="x" />
-        <Field label="Annual Revenue" value={revenue} onChange={setRevenue} prefix="$" />
-        <Field label="Revenue Multiple" value={revenueMultiple} onChange={setRevenueMultiple} suffix="x" />
-        <Field label="Total Assets" value={assets} onChange={setAssets} prefix="$" />
-        <Field label="Total Liabilities" value={liabilities} onChange={setLiabilities} prefix="$" />
+        <Field label={t.annualEarnings} value={annualEarnings} onChange={setAnnualEarnings} prefix="$" />
+        <Field label={t.industryMultiple} value={industryMultiple} onChange={setIndustryMultiple} suffix="x" />
+        <Field label={t.annualRevenue} value={revenue} onChange={setRevenue} prefix="$" />
+        <Field label={t.revenueMultiple} value={revenueMultiple} onChange={setRevenueMultiple} suffix="x" />
+        <Field label={t.totalAssets} value={assets} onChange={setAssets} prefix="$" />
+        <Field label={t.liabilities} value={liabilities} onChange={setLiabilities} prefix="$" />
       </div>
       <div className="space-y-3">
-        <ResultRow label="Earnings Method" value={fmt(earningsValuation)} />
-        <ResultRow label="Revenue Method" value={fmt(revenueValuation)} />
-        <ResultRow label="Asset-Based Method" value={fmt(assetValuation)} />
-        <ResultRow label="Average (Blended)" value={fmt(average)} emphasized />
-        <p className="text-xs text-muted">
-          A proper business valuation considers cash flow quality, customer concentration, growth
-          prospects, and market conditions. Contact us for a detailed assessment.
-        </p>
+        <ResultRow label={t.earningsMethod} value={fmt(earningsValuation)} />
+        <ResultRow label={t.revenueMethod} value={fmt(revenueValuation)} />
+        <ResultRow label={t.assetMethod} value={fmt(assetValuation)} />
+        <ResultRow label={t.blended} value={fmt(average)} emphasized />
+        <p className="text-xs text-muted">{t.valuationNote}</p>
       </div>
     </div>
   );
@@ -540,7 +753,10 @@ export function BusinessValuationCalculator() {
 
 // ---------- 8. Compound Savings ----------
 
-export function CompoundSavingsCalculator() {
+export function CompoundSavingsCalculator({ locale = "en" }: LocaleProp) {
+  const t = CALC_T[locale];
+  const fmt = fmtLocale(locale);
+  const fmtDecimal = fmtDecimalLocale(locale);
   const [principal, setPrincipal] = useState("5000");
   const [monthly, setMonthly] = useState("400");
   const [rate, setRate] = useState("7");
@@ -555,7 +771,6 @@ export function CompoundSavingsCalculator() {
   const totalContributed = p + m * 12 * y;
   const interestEarned = fv - totalContributed;
 
-  // Year-by-year projection
   const yearly = useMemo(() => {
     const rows: Array<{ year: number; balance: number; contributed: number; interest: number }> = [];
     let balance = p;
@@ -577,17 +792,17 @@ export function CompoundSavingsCalculator() {
     <div>
       <div className="grid gap-8 lg:grid-cols-[1fr_1.1fr]">
         <div className="space-y-4">
-          <Field label="Initial Principal" value={principal} onChange={setPrincipal} prefix="$" />
-          <Field label="Monthly Contribution" value={monthly} onChange={setMonthly} prefix="$" />
-          <Field label="Annual Return Rate" value={rate} onChange={setRate} suffix="%" />
-          <Field label="Years" value={years} onChange={setYears} />
+          <Field label={t.initialPrincipal} value={principal} onChange={setPrincipal} prefix="$" />
+          <Field label={t.monthlyContrib} value={monthly} onChange={setMonthly} prefix="$" />
+          <Field label={t.annualReturnRate} value={rate} onChange={setRate} suffix="%" />
+          <Field label={t.years} value={years} onChange={setYears} />
         </div>
         <div className="space-y-3">
-          <ResultRow label="Total Contributed" value={fmt(totalContributed)} />
-          <ResultRow label="Interest Earned" value={fmt(interestEarned)} />
-          <ResultRow label="Final Balance" value={fmt(fv)} emphasized />
+          <ResultRow label={t.totalContrib} value={fmt(totalContributed)} />
+          <ResultRow label={t.interestEarned} value={fmt(interestEarned)} />
+          <ResultRow label={t.finalBalance} value={fmt(fv)} emphasized />
           <ResultRow
-            label="Growth Multiplier"
+            label={t.growthMult}
             value={`${fmtDecimal(fv / Math.max(totalContributed, 1), 2)}x`}
           />
         </div>
@@ -598,10 +813,10 @@ export function CompoundSavingsCalculator() {
           <table className="min-w-full text-sm">
             <thead className="bg-surface text-xs uppercase tracking-wider text-muted">
               <tr>
-                <th className="px-4 py-2.5 text-left">Year</th>
-                <th className="px-4 py-2.5 text-right">Contributed</th>
-                <th className="px-4 py-2.5 text-right">Interest</th>
-                <th className="px-4 py-2.5 text-right">Balance</th>
+                <th className="px-4 py-2.5 text-left">{t.year}</th>
+                <th className="px-4 py-2.5 text-right">{t.contributed}</th>
+                <th className="px-4 py-2.5 text-right">{t.interest}</th>
+                <th className="px-4 py-2.5 text-right">{t.balance}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border">
@@ -622,4 +837,3 @@ export function CompoundSavingsCalculator() {
     </div>
   );
 }
-

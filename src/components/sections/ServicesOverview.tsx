@@ -13,7 +13,7 @@ export function ServicesOverview({ content, services, locale }: Props) {
     <section className="py-24 lg:py-28">
       <Container>
         <SectionHeading title={content.heading} subtitle={content.subheading} />
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
           {services.map((service) => (
             <Link key={service.slug} href={`/${locale}/services/${service.slug}`} className="group">
               <Card hover className="h-full transition-all group-hover:border-accent/25">

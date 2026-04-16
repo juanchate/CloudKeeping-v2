@@ -10,9 +10,9 @@ interface Props { params: Promise<{ locale: string }> }
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   if (!isValidLocale(locale)) return {};
-  const title = locale === "es" ? "Pol\u00edtica de Privacidad" : "Privacy Policy";
+  const title = locale === "es" ? "Política de Privacidad" : "Privacy Policy";
   const description = locale === "es"
-    ? `Pol\u00edtica de privacidad de ${SITE_NAME}. C\u00f3mo recopilamos, usamos y protegemos tu informaci\u00f3n.`
+    ? `Política de privacidad de ${SITE_NAME}. Cómo recopilamos, usamos y protegemos tu información.`
     : `Privacy Policy for ${SITE_NAME}. How we collect, use, and protect your information.`;
   return {
     ...createPageMetadata({
@@ -34,11 +34,11 @@ export default async function PrivacyPage({ params }: Props) {
       <Container>
         <div className="mx-auto max-w-3xl">
           <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl mb-8">
-            {locale === "es" ? "Pol\u00edtica de Privacidad" : "Privacy Policy"}
+            {locale === "es" ? "Política de Privacidad" : "Privacy Policy"}
           </h1>
           {locale === "es" && (
             <div className="mb-8 rounded-2xl border border-accent/20 bg-accent/5 p-4 text-sm text-muted">
-              Esta pol\u00edtica de privacidad se presenta en ingl\u00e9s por razones legales. Si tiene preguntas, cont\u00e1ctenos a <a href={`mailto:${CONTACT.email}`} className="text-accent hover:text-accent-dark underline">{CONTACT.email}</a>.
+              Esta política de privacidad se presenta en inglés por razones legales. Si tiene preguntas, contáctenos a <a href={`mailto:${CONTACT.email}`} className="text-accent hover:text-accent-dark underline">{CONTACT.email}</a>.
             </div>
           )}
           <p className="text-sm text-muted mb-8">Last updated: February 2026</p>

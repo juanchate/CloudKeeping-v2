@@ -5,32 +5,58 @@ import { isValidLocale, type Locale } from "@/lib/i18n";
 import { createPageMetadata } from "@/lib/seo";
 import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card";
-import { ARTICLES } from "@/lib/tools-data";
+import { getArticles } from "@/lib/tools-data";
 import { ChevronLeft, ArrowRight, BookOpen, Globe, Coins, Gift, CalendarClock, Users, TrendingUp } from "lucide-react";
 
 const icons: Record<string, React.ComponentType<{ className?: string }>> = {
   Globe, Coins, Gift, CalendarClock, Users, TrendingUp,
 };
 
+const TRANSLATIONS = {
+  en: {
+    metaTitle: "Tax Guides & Articles",
+    metaDesc:
+      "Browse CloudKeeping's Canadian tax guides and articles covering personal tax, business tax, payroll, and tax planning strategies.",
+    backTools: "Back to Tools",
+    title: "Tax Guides & Articles",
+    subtitle:
+      "Expert insights and practical guides to help you navigate Canadian tax laws and optimize your financial strategy.",
+    readArticle: "Read Article",
+  },
+  es: {
+    metaTitle: "Guías y Artículos Fiscales",
+    metaDesc:
+      "Explora las guías y artículos fiscales canadienses de CloudKeeping sobre impuestos personales, corporativos, nómina y estrategias de planificación.",
+    backTools: "Volver a Herramientas",
+    title: "Guías y Artículos Fiscales",
+    subtitle:
+      "Perspectivas expertas y guías prácticas para ayudarte a navegar las leyes fiscales canadienses y optimizar tu estrategia financiera.",
+    readArticle: "Leer Artículo",
+  },
+} as const;
+
 interface Props { params: Promise<{ locale: string }> }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   if (!isValidLocale(locale)) return {};
+  const t = TRANSLATIONS[locale as Locale];
   return createPageMetadata({
     locale: locale as Locale,
     path: "/tools/articles",
-    title: "Tax Guides & Articles",
-    description:
-      "Browse CloudKeeping's Canadian tax guides and articles covering personal tax, business tax, payroll, and tax planning strategies.",
+    title: t.metaTitle,
+    description: t.metaDesc,
   });
 }
 
 export default async function ArticlesPage({ params }: Props) {
   const { locale } = await params;
   if (!isValidLocale(locale)) notFound();
+  const L = locale as Locale;
+  const t = TRANSLATIONS[L];
 
-  const categories = Array.from(new Set(ARTICLES.map((a) => a.category)));
+  const articles = getArticles(L);
+  const categories = Array.from(new Set(articles.map((a) => a.category)));
 
   return (
     <>
@@ -41,16 +67,13 @@ export default async function ArticlesPage({ params }: Props) {
             className="inline-flex items-center gap-1 text-sm text-muted transition-colors hover:text-foreground"
           >
             <ChevronLeft className="h-3.5 w-3.5" />
-            Back to Tools
+            {t.backTools}
           </Link>
           <div className="mt-4 max-w-3xl">
             <h1 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
-              Tax Guides &amp; Articles
+              {t.title}
             </h1>
-            <p className="mt-4 text-lg text-muted leading-relaxed">
-              Expert insights and practical guides to help you navigate Canadian tax laws and
-              optimize your financial strategy.
-            </p>
+            <p className="mt-4 text-lg text-muted leading-relaxed">{t.subtitle}</p>
             <div className="mt-6 flex flex-wrap gap-2">
               {categories.map((c) => (
                 <span
@@ -68,7 +91,7 @@ export default async function ArticlesPage({ params }: Props) {
       <section className="py-16 lg:py-20">
         <Container>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {ARTICLES.map((article) => {
+            {articles.map((article) => {
               const Icon = icons[article.icon] ?? BookOpen;
               return (
                 <Link
@@ -87,7 +110,7 @@ export default async function ArticlesPage({ params }: Props) {
                     <h3 className="text-lg font-semibold text-foreground">{article.title}</h3>
                     <p className="mt-2 text-sm text-muted leading-relaxed">{article.excerpt}</p>
                     <div className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-accent group-hover:text-accent-dark">
-                      Read Article
+                      {t.readArticle}
                       <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
                     </div>
                   </Card>

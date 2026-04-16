@@ -11,24 +11,26 @@ import {
   CompoundSavingsCalculator,
 } from "./Calculators";
 
-export function CalculatorRenderer({ slug }: { slug: string }) {
+type LocaleKey = "en" | "es";
+
+export function CalculatorRenderer({ slug, locale = "en" }: { slug: string; locale?: LocaleKey }) {
   switch (slug) {
     case "breakeven-analysis":
-      return <BreakevenCalculator />;
+      return <BreakevenCalculator locale={locale} />;
     case "loan-amortization":
-      return <LoanAmortizationCalculator />;
+      return <LoanAmortizationCalculator locale={locale} />;
     case "rrsp-vs-tfsa":
-      return <RRSPvsTFSACalculator />;
+      return <RRSPvsTFSACalculator locale={locale} />;
     case "gst-hst":
-      return <GSTHSTCalculator />;
+      return <GSTHSTCalculator locale={locale} />;
     case "retirement-planning":
-      return <RetirementCalculator />;
+      return <RetirementCalculator locale={locale} />;
     case "financial-ratios":
-      return <FinancialRatiosCalculator />;
+      return <FinancialRatiosCalculator locale={locale} />;
     case "business-valuation":
-      return <BusinessValuationCalculator />;
+      return <BusinessValuationCalculator locale={locale} />;
     case "compound-savings":
-      return <CompoundSavingsCalculator />;
+      return <CompoundSavingsCalculator locale={locale} />;
     default:
       return <div className="text-muted">Calculator not available.</div>;
   }

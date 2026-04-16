@@ -2,10 +2,101 @@
 
 import { useMemo, useState } from "react";
 import { Container } from "@/components/ui/Container";
-import { LayoutDashboard, TrendingUp, Calculator as CalcIcon, PiggyBank } from "lucide-react";
+import { TrendingUp, Calculator as CalcIcon, PiggyBank } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-type Tab = "tax" | "compare" | "growth" | "projections";
+type Tab = "tax" | "compare" | "projections";
+type LocaleKey = "en" | "es";
+
+const DASH_T = {
+  en: {
+    tabs: {
+      tax: "Tax Breakdown",
+      compare: "Income Compare",
+      projections: "Projections",
+    },
+    taxTitle: "Tax Breakdown",
+    taxSubtitle:
+      "See exactly how your income is split across federal, provincial, CPP, and EI.",
+    income: "Gross Annual Income",
+    province: "Province",
+    totalTax: "Total Tax",
+    grossIncome: "Gross Income",
+    totalDeductions: "Total Deductions",
+    netTakeHome: "Net Take-Home",
+    effectiveRate: "Effective Tax Rate",
+    federal: "Federal Tax",
+    provincial: "Provincial Tax",
+    cpp: "CPP",
+    ei: "EI",
+    compareTitle: "Salary vs Business Income",
+    compareSubtitle:
+      "Compare after-tax income when paying yourself as a salary, all dividends, or a 50/50 mix (incorporated owner-managers).",
+    grossAmount: "Gross Pre-Tax Amount",
+    afterTaxIncome: "After-Tax Income",
+    compareNote:
+      "Note: simplified calculation. Exact results depend on RRSP room, dividend type, GRIP, and integration effects — book a consultation for advice.",
+    salary: "Salary",
+    salaryDividend: "Salary + Dividends (50/50)",
+    allDividends: "All Dividends",
+    rate: "Rate (%)",
+    projTitle: "Retirement Projections",
+    projSubtitle: "Estimate how much you'll have saved at retirement based on your contributions.",
+    currentAge: "Current Age",
+    retireAge: "Retire Age",
+    currentSavings: "Current Savings",
+    annualContrib: "Annual Contribution",
+    projBalance: "Projected Retirement Balance",
+    atAge: "At age",
+    portfolioValue: "Portfolio Value",
+    disclaimer:
+      "Results are estimates for planning purposes only and not a substitute for professional advice. 2025 Canadian federal & provincial tax rates used.",
+  },
+  es: {
+    tabs: {
+      tax: "Impuestos",
+      compare: "Comparar Ingresos",
+      projections: "Proyecciones",
+    },
+    taxTitle: "Distribución de Impuestos",
+    taxSubtitle:
+      "Ve exactamente cómo se distribuye tu ingreso entre federal, provincial, CPP y EI.",
+    income: "Ingreso Bruto Anual",
+    province: "Provincia",
+    totalTax: "Impuesto Total",
+    grossIncome: "Ingreso Bruto",
+    totalDeductions: "Deducciones Totales",
+    netTakeHome: "Ingreso Neto",
+    effectiveRate: "Tasa Efectiva de Impuestos",
+    federal: "Impuesto Federal",
+    provincial: "Impuesto Provincial",
+    cpp: "CPP",
+    ei: "EI",
+    compareTitle: "Salario vs Ingreso Empresarial",
+    compareSubtitle:
+      "Compara el ingreso después de impuestos al pagarte como salario, todo en dividendos o una mezcla 50/50 (dueños-gerentes incorporados).",
+    grossAmount: "Monto Bruto Antes de Impuestos",
+    afterTaxIncome: "Ingreso Después de Impuestos",
+    compareNote:
+      "Nota: cálculo simplificado. Los resultados exactos dependen del espacio RRSP, tipo de dividendo, GRIP y efectos de integración — reserva una consulta para asesoramiento.",
+    salary: "Salario",
+    salaryDividend: "Salario + Dividendos (50/50)",
+    allDividends: "Todo en Dividendos",
+    rate: "Tasa (%)",
+    projTitle: "Proyecciones de Retiro",
+    projSubtitle:
+      "Estima cuánto habrás ahorrado al momento del retiro según tus aportes.",
+    currentAge: "Edad Actual",
+    retireAge: "Edad de Retiro",
+    currentSavings: "Ahorros Actuales",
+    annualContrib: "Aporte Anual",
+    projBalance: "Balance Proyectado al Retiro",
+    atAge: "A la edad de",
+    portfolioValue: "Valor del Portafolio",
+    disclaimer:
+      "Los resultados son estimaciones con fines de planificación y no sustituyen el asesoramiento profesional. Se usan tasas federales y provinciales canadienses de 2025.",
+  },
+} as const;
 
 interface Province {
   code: string;
@@ -97,17 +188,23 @@ function eiContribution(income: number) {
   return Math.min(income, EI_MAX) * 0.0164;
 }
 
-const fmt = (n: number) =>
-  n.toLocaleString("en-CA", { style: "currency", currency: "CAD", maximumFractionDigits: 0 });
+const fmtLocale = (locale: LocaleKey) => (n: number) =>
+  n.toLocaleString(locale === "es" ? "es-CA" : "en-CA", {
+    style: "currency",
+    currency: "CAD",
+    maximumFractionDigits: 0,
+  });
 
 function DonutChart({
   segments,
   centerLabel,
   centerValue,
+  fmt,
 }: {
   segments: Array<{ label: string; value: number; color: string }>;
   centerLabel: string;
   centerValue: string;
+  fmt: (n: number) => string;
 }) {
   const total = segments.reduce((acc, s) => acc + s.value, 0) || 1;
   let offset = 0;
@@ -161,9 +258,11 @@ function DonutChart({
 function BarCompare({
   bars,
   max,
+  fmt,
 }: {
   bars: Array<{ label: string; value: number; color: string }>;
   max: number;
+  fmt: (n: number) => string;
 }) {
   return (
     <div className="space-y-4">
@@ -188,9 +287,11 @@ function BarCompare({
 function LineChart({
   series,
   years,
+  fmt,
 }: {
   series: Array<{ label: string; values: number[]; color: string }>;
   years: number[];
+  fmt: (n: number) => string;
 }) {
   const max = Math.max(...series.flatMap((s) => s.values), 1);
   const w = 600;
@@ -265,7 +366,10 @@ function LineChart({
   );
 }
 
-export function FinancialDashboard() {
+export function FinancialDashboard({ locale = "en" }: { locale?: string } = {}) {
+  const L: LocaleKey = locale === "es" ? "es" : "en";
+  const t = DASH_T[L];
+  const fmt = fmtLocale(L);
   const [tab, setTab] = useState<Tab>("tax");
 
   // Tax Breakdown
@@ -279,12 +383,12 @@ export function FinancialDashboard() {
     const cpp = cppContribution(income);
     const ei = eiContribution(income);
     return [
-      { label: "Federal Tax", value: federal, color: "#1a2e4a" },
-      { label: "Provincial Tax", value: provincial, color: "#C8922A" },
-      { label: "CPP", value: cpp, color: "#16a34a" },
-      { label: "EI", value: ei, color: "#dc2626" },
+      { label: t.federal, value: federal, color: "#1a2e4a" },
+      { label: t.provincial, value: provincial, color: "#C8922A" },
+      { label: t.cpp, value: cpp, color: "#16a34a" },
+      { label: t.ei, value: ei, color: "#dc2626" },
     ];
-  }, [income, province]);
+  }, [income, province, t]);
 
   const totalTax = taxSegments.reduce((a, b) => a + b.value, 0);
   const netIncome = income - totalTax;
@@ -304,37 +408,10 @@ export function FinancialDashboard() {
   const totalDividendTax = corpTax + Math.max(0, personalDivTax - afterCorp * 0.15);
 
   const compareBars = [
-    { label: "Salary", value: compareIncome - salaryTax, color: "#1a2e4a" },
-    { label: "Salary + Dividends (50/50)", value: compareIncome - (salaryTax * 0.5 + totalDividendTax * 0.5), color: "#C8922A" },
-    { label: "All Dividends", value: compareIncome - totalDividendTax, color: "#16a34a" },
+    { label: t.salary, value: compareIncome - salaryTax, color: "#1a2e4a" },
+    { label: t.salaryDividend, value: compareIncome - (salaryTax * 0.5 + totalDividendTax * 0.5), color: "#C8922A" },
+    { label: t.allDividends, value: compareIncome - totalDividendTax, color: "#16a34a" },
   ];
-
-  // Growth
-  const [principal, setPrincipal] = useState(10000);
-  const [monthly, setMonthly] = useState(500);
-  const [rate, setRate] = useState(7);
-  const [years, setYears] = useState(25);
-
-  const growth = useMemo(() => {
-    const rrsp: number[] = [];
-    const tfsa: number[] = [];
-    const savings: number[] = [];
-    let rVal = principal;
-    let tVal = principal;
-    let sVal = principal;
-    const r = rate / 100;
-    const yArr: number[] = [];
-    for (let y = 0; y <= years; y++) {
-      rrsp.push(Math.round(rVal));
-      tfsa.push(Math.round(tVal));
-      savings.push(Math.round(sVal));
-      yArr.push(new Date().getFullYear() + y);
-      rVal = rVal * (1 + r) + monthly * 12;
-      tVal = tVal * (1 + r) + monthly * 12;
-      sVal = sVal * (1 + r * 0.7) + monthly * 12; // taxable savings
-    }
-    return { rrsp, tfsa, savings, years: yArr };
-  }, [principal, monthly, rate, years]);
 
   // Retirement projection (simplified)
   const [currentAge, setCurrentAge] = useState(35);
@@ -357,10 +434,9 @@ export function FinancialDashboard() {
   }, [currentAge, retireAge, currentSavings, annualContrib, projRate]);
 
   const tabs = [
-    { id: "tax" as Tab, label: "Tax Breakdown", icon: CalcIcon },
-    { id: "compare" as Tab, label: "Income Compare", icon: TrendingUp },
-    { id: "growth" as Tab, label: "Growth Charts", icon: LayoutDashboard },
-    { id: "projections" as Tab, label: "Projections", icon: PiggyBank },
+    { id: "tax" as Tab, label: t.tabs.tax, icon: CalcIcon },
+    { id: "compare" as Tab, label: t.tabs.compare, icon: TrendingUp },
+    { id: "projections" as Tab, label: t.tabs.projections, icon: PiggyBank },
   ];
 
   return (
@@ -368,20 +444,20 @@ export function FinancialDashboard() {
       <Container>
         <div className="mx-auto max-w-6xl">
           <div className="rounded-2xl border border-border/60 bg-white p-2">
-            <div className="grid gap-1 sm:grid-cols-4">
-              {tabs.map((t) => (
+            <div className="grid gap-1 sm:grid-cols-3">
+              {tabs.map((tabItem) => (
                 <button
-                  key={t.id}
-                  onClick={() => setTab(t.id)}
+                  key={tabItem.id}
+                  onClick={() => setTab(tabItem.id)}
                   className={cn(
                     "flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-medium transition-all",
-                    tab === t.id
+                    tab === tabItem.id
                       ? "bg-primary text-white shadow"
                       : "text-muted hover:bg-surface hover:text-foreground"
                   )}
                 >
-                  <t.icon className="h-4 w-4" />
-                  {t.label}
+                  <tabItem.icon className="h-4 w-4" />
+                  {tabItem.label}
                 </button>
               ))}
             </div>
@@ -390,15 +466,13 @@ export function FinancialDashboard() {
           <div className="mt-8 rounded-2xl border border-border/60 bg-white p-6 sm:p-8">
             {tab === "tax" && (
               <div>
-                <h3 className="text-xl font-semibold text-foreground">Tax Breakdown</h3>
-                <p className="mt-1 text-sm text-muted">
-                  See exactly how your income is split across federal, provincial, CPP, and EI.
-                </p>
+                <h3 className="text-xl font-semibold text-foreground">{t.taxTitle}</h3>
+                <p className="mt-1 text-sm text-muted">{t.taxSubtitle}</p>
 
                 <div className="mt-6 grid gap-6 sm:grid-cols-2">
-                  <NumberField label="Gross Annual Income" value={income} onChange={setIncome} prefix="$" />
+                  <NumberField label={t.income} value={income} onChange={setIncome} prefix="$" />
                   <SelectField
-                    label="Province"
+                    label={t.province}
                     value={provinceCode}
                     onChange={setProvinceCode}
                     options={PROVINCES.map((p) => ({ value: p.code, label: p.name }))}
@@ -409,15 +483,16 @@ export function FinancialDashboard() {
                   <div className="rounded-xl bg-surface p-6">
                     <DonutChart
                       segments={taxSegments}
-                      centerLabel="Total Tax"
+                      centerLabel={t.totalTax}
                       centerValue={fmt(totalTax)}
+                      fmt={fmt}
                     />
                   </div>
                   <div className="space-y-3">
-                    <MetricCard label="Gross Income" value={fmt(income)} />
-                    <MetricCard label="Total Deductions" value={fmt(totalTax)} color="text-error" />
-                    <MetricCard label="Net Take-Home" value={fmt(netIncome)} color="text-success" highlight />
-                    <MetricCard label="Effective Tax Rate" value={`${((totalTax / income) * 100).toFixed(1)}%`} />
+                    <MetricCard label={t.grossIncome} value={fmt(income)} />
+                    <MetricCard label={t.totalDeductions} value={fmt(totalTax)} color="text-error" />
+                    <MetricCard label={t.netTakeHome} value={fmt(netIncome)} color="text-success" highlight />
+                    <MetricCard label={t.effectiveRate} value={`${((totalTax / income) * 100).toFixed(1)}%`} />
                   </div>
                 </div>
               </div>
@@ -425,16 +500,13 @@ export function FinancialDashboard() {
 
             {tab === "compare" && (
               <div>
-                <h3 className="text-xl font-semibold text-foreground">Salary vs Business Income</h3>
-                <p className="mt-1 text-sm text-muted">
-                  Compare after-tax income when paying yourself as a salary, all dividends, or a
-                  50/50 mix (incorporated owner-managers).
-                </p>
+                <h3 className="text-xl font-semibold text-foreground">{t.compareTitle}</h3>
+                <p className="mt-1 text-sm text-muted">{t.compareSubtitle}</p>
 
                 <div className="mt-6 grid gap-6 sm:grid-cols-2">
-                  <NumberField label="Gross Pre-Tax Amount" value={compareIncome} onChange={setCompareIncome} prefix="$" />
+                  <NumberField label={t.grossAmount} value={compareIncome} onChange={setCompareIncome} prefix="$" />
                   <SelectField
-                    label="Province"
+                    label={t.province}
                     value={provinceCode}
                     onChange={setProvinceCode}
                     options={PROVINCES.map((p) => ({ value: p.code, label: p.name }))}
@@ -442,86 +514,51 @@ export function FinancialDashboard() {
                 </div>
 
                 <div className="mt-8 rounded-xl bg-surface p-6">
-                  <div className="mb-4 text-sm font-semibold text-foreground">After-Tax Income</div>
-                  <BarCompare bars={compareBars} max={compareIncome} />
-                  <p className="mt-4 text-xs text-muted">
-                    Note: simplified calculation. Exact results depend on RRSP room, dividend type,
-                    GRIP, and integration effects — book a consultation for advice.
-                  </p>
-                </div>
-              </div>
-            )}
-
-            {tab === "growth" && (
-              <div>
-                <h3 className="text-xl font-semibold text-foreground">Growth Charts</h3>
-                <p className="mt-1 text-sm text-muted">
-                  Visualize how your money grows in an RRSP, TFSA, or taxable account over time.
-                </p>
-
-                <div className="mt-6 grid gap-4 sm:grid-cols-4">
-                  <NumberField label="Initial" value={principal} onChange={setPrincipal} prefix="$" />
-                  <NumberField label="Monthly" value={monthly} onChange={setMonthly} prefix="$" />
-                  <NumberField label="Rate (%)" value={rate} onChange={setRate} />
-                  <NumberField label="Years" value={years} onChange={setYears} />
-                </div>
-
-                <div className="mt-8 rounded-xl bg-surface p-6">
-                  <LineChart
-                    series={[
-                      { label: "RRSP (tax-deferred)", values: growth.rrsp, color: "#1a2e4a" },
-                      { label: "TFSA (tax-free)", values: growth.tfsa, color: "#C8922A" },
-                      { label: "Taxable Savings", values: growth.savings, color: "#9ca3af" },
-                    ]}
-                    years={growth.years}
-                  />
+                  <div className="mb-4 text-sm font-semibold text-foreground">{t.afterTaxIncome}</div>
+                  <BarCompare bars={compareBars} max={compareIncome} fmt={fmt} />
+                  <p className="mt-4 text-xs text-muted">{t.compareNote}</p>
                 </div>
               </div>
             )}
 
             {tab === "projections" && (
               <div>
-                <h3 className="text-xl font-semibold text-foreground">Retirement Projections</h3>
-                <p className="mt-1 text-sm text-muted">
-                  Estimate how much you&apos;ll have saved at retirement based on your
-                  contributions.
-                </p>
+                <h3 className="text-xl font-semibold text-foreground">{t.projTitle}</h3>
+                <p className="mt-1 text-sm text-muted">{t.projSubtitle}</p>
 
                 <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-                  <NumberField label="Current Age" value={currentAge} onChange={setCurrentAge} />
-                  <NumberField label="Retire Age" value={retireAge} onChange={setRetireAge} />
-                  <NumberField label="Current Savings" value={currentSavings} onChange={setCurrentSavings} prefix="$" />
-                  <NumberField label="Annual Contribution" value={annualContrib} onChange={setAnnualContrib} prefix="$" />
-                  <NumberField label="Rate (%)" value={projRate} onChange={setProjRate} />
+                  <NumberField label={t.currentAge} value={currentAge} onChange={setCurrentAge} />
+                  <NumberField label={t.retireAge} value={retireAge} onChange={setRetireAge} />
+                  <NumberField label={t.currentSavings} value={currentSavings} onChange={setCurrentSavings} prefix="$" />
+                  <NumberField label={t.annualContrib} value={annualContrib} onChange={setAnnualContrib} prefix="$" />
+                  <NumberField label={t.rate} value={projRate} onChange={setProjRate} />
                 </div>
 
                 <div className="mt-8 rounded-xl bg-surface p-6">
                   <div className="mb-4 flex flex-wrap items-baseline justify-between gap-3">
                     <div>
                       <div className="text-xs font-semibold uppercase tracking-wider text-muted">
-                        Projected Retirement Balance
+                        {t.projBalance}
                       </div>
                       <div className="text-3xl font-bold text-foreground">
                         {fmt(projection.values[projection.values.length - 1] ?? 0)}
                       </div>
                     </div>
-                    <div className="text-sm text-muted">At age {retireAge}</div>
+                    <div className="text-sm text-muted">{t.atAge} {retireAge}</div>
                   </div>
                   <LineChart
                     series={[
-                      { label: "Portfolio Value", values: projection.values, color: "#C8922A" },
+                      { label: t.portfolioValue, values: projection.values, color: "#C8922A" },
                     ]}
                     years={projection.years}
+                    fmt={fmt}
                   />
                 </div>
               </div>
             )}
           </div>
 
-          <p className="mt-6 text-center text-xs text-muted">
-            Results are estimates for planning purposes only and not a substitute for professional
-            advice. 2025 Canadian federal &amp; provincial tax rates used.
-          </p>
+          <p className="mt-6 text-center text-xs text-muted">{t.disclaimer}</p>
         </div>
       </Container>
     </section>
