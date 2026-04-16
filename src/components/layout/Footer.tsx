@@ -60,19 +60,19 @@ export function Footer({ dict, locale }: FooterProps) {
           </div>
 
           <div>
-            <h3 className="mb-4 text-xs font-semibold uppercase tracking-[0.15em] text-accent/70">Resources</h3>
+            <h3 className="mb-4 text-xs font-semibold uppercase tracking-[0.15em] text-accent/70">{dict.footer.resourcesTitle}</h3>
             <ul className="space-y-3">
               <li>
-                <Link href={`/${locale}/tools`} className="text-sm text-white/50 transition-colors hover:text-white">Financial Tools</Link>
+                <Link href={`/${locale}/tools`} className="text-sm text-white/50 transition-colors hover:text-white">{dict.footer.resourcesTools}</Link>
               </li>
               <li>
-                <Link href={`/${locale}/tools/dashboard`} className="text-sm text-white/50 transition-colors hover:text-white">Financial Dashboard</Link>
+                <Link href={`/${locale}/tools/dashboard`} className="text-sm text-white/50 transition-colors hover:text-white">{dict.footer.resourcesDashboard}</Link>
               </li>
               <li>
-                <Link href={`/${locale}/tools/articles`} className="text-sm text-white/50 transition-colors hover:text-white">Tax Guides &amp; Articles</Link>
+                <Link href={`/${locale}/tools/articles`} className="text-sm text-white/50 transition-colors hover:text-white">{dict.footer.resourcesArticles}</Link>
               </li>
               <li>
-                <Link href={`/${locale}/cra-authorization`} className="text-sm text-white/50 transition-colors hover:text-white">Add Us as CRA Rep</Link>
+                <Link href={`/${locale}/cra-authorization`} className="text-sm text-white/50 transition-colors hover:text-white">{dict.footer.resourcesCRA}</Link>
               </li>
             </ul>
           </div>
