@@ -41,7 +41,9 @@ export default async function PrivacyPage({ params }: Props) {
               Esta política de privacidad se presenta en inglés por razones legales. Si tiene preguntas, contáctenos a <a href={`mailto:${CONTACT.email}`} className="text-accent hover:text-accent-dark underline">{CONTACT.email}</a>.
             </div>
           )}
-          <p className="text-sm text-muted mb-8">Last updated: February 2026</p>
+          <p className="text-sm text-muted mb-8">
+            {locale === "es" ? "Última actualización: abril de 2026" : "Last updated: April 2026"}
+          </p>
           <div className="space-y-8 text-muted leading-relaxed">
             <section>
               <h2 className="text-xl font-semibold text-foreground mb-3">1. Introduction</h2>
