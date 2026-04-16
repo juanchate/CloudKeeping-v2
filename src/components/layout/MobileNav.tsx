@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 import type { Dictionary } from "@/lib/dictionaries";
 import type { Locale } from "@/lib/i18n";
 
-const navKeys = ["home", "services", "about", "faq", "contact"] as const;
+const navKeys = ["home", "services", "tools", "about", "faq", "contact"] as const;
 
 interface MobileNavProps {
   isOpen: boolean;

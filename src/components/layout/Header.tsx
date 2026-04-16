@@ -18,7 +18,7 @@ interface HeaderProps {
   locale: Locale;
 }
 
-const navKeys = ["home", "services", "about", "faq"] as const;
+const navKeys = ["home", "services", "tools", "about", "faq"] as const;
 
 export function Header({ dict, locale }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

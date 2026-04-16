@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { locales } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
+import { CALCULATORS, ARTICLES } from "@/lib/tools-data";
 
 const SITE_URL = process.env.SITE_URL || "https://cloudkeeping.cpa";
 
@@ -9,6 +10,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticPaths = [
     { path: "", priority: 1 },
     { path: "/services", priority: 0.9 },
+    { path: "/tools", priority: 0.9 },
+    { path: "/tools/dashboard", priority: 0.8 },
+    { path: "/tools/articles", priority: 0.8 },
+    { path: "/cra-authorization", priority: 0.8 },
     { path: "/about", priority: 0.7 },
     { path: "/faq", priority: 0.7 },
     { path: "/contact", priority: 0.8 },
@@ -20,7 +25,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  const allPaths = [...staticPaths, ...servicePaths];
+  const calculatorPaths = CALCULATORS.map((c) => ({
+    path: `/tools/calculators/${c.slug}`,
+    priority: 0.7,
+  }));
+
+  const articlePaths = ARTICLES.map((a) => ({
+    path: `/tools/articles/${a.slug}`,
+    priority: 0.7,
+  }));
+
+  const allPaths = [...staticPaths, ...servicePaths, ...calculatorPaths, ...articlePaths];
 
   return locales.flatMap((locale) =>
     allPaths.map((p) => ({

@@ -2,6 +2,7 @@ const es = {
   nav: {
     home: "Inicio",
     services: "Servicios",
+    tools: "Herramientas",
     about: "Nosotros",
     faq: "Preguntas Frecuentes",
     contact: "Contacto",

@@ -17,7 +17,16 @@ export const CONTACT = {
 export const NAV_HREFS = {
   home: "/",
   services: "/services",
+  tools: "/tools",
   about: "/about",
   faq: "/faq",
   contact: "/contact",
+  craAuthorization: "/cra-authorization",
+} as const;
+
+export const CRA_REP = {
+  repId: "DN2XB9F",
+  repName: "Fiorella Armoa",
+  firmName: "CloudKeeping",
+  fullName: "Fiorella Armoa (CloudKeeping)",
 } as const;

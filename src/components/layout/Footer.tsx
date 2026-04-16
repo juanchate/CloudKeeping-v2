@@ -8,7 +8,7 @@ import { trackPhoneClick, trackEmailClick } from "@/lib/analytics";
 import type { Dictionary } from "@/lib/dictionaries";
 import type { Locale } from "@/lib/i18n";
 
-const navKeys = ["home", "services", "about", "faq", "contact"] as const;
+const navKeys = ["home", "services", "tools", "about", "faq", "contact"] as const;
 
 interface FooterProps {
   dict: Dictionary;
@@ -19,7 +19,7 @@ export function Footer({ dict, locale }: FooterProps) {
   const currentYear = new Date().getFullYear();
   const navItems = navKeys.map((k) => ({
     label: dict.nav[k],
-    href: `/${locale}${NAV_HREFS[k === "contact" ? "contact" : k]}`,
+    href: `/${locale}${NAV_HREFS[k]}`,
   }));
 
   return (
@@ -27,7 +27,7 @@ export function Footer({ dict, locale }: FooterProps) {
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
 
       <Container>
-        <div className="grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-5">
           <div className="lg:col-span-1">
             <Link href={`/${locale}`} className="text-white">
               <span className="text-[22px] font-black tracking-tight" style={{ fontFamily: "var(--font-logo)" }}>
@@ -56,6 +56,24 @@ export function Footer({ dict, locale }: FooterProps) {
                   <Link href={`/${locale}/services/${s.slug}`} className="text-sm text-white/50 transition-colors hover:text-white">{s.title}</Link>
                 </li>
               ))}
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="mb-4 text-xs font-semibold uppercase tracking-[0.15em] text-accent/70">Resources</h3>
+            <ul className="space-y-3">
+              <li>
+                <Link href={`/${locale}/tools`} className="text-sm text-white/50 transition-colors hover:text-white">Financial Tools</Link>
+              </li>
+              <li>
+                <Link href={`/${locale}/tools/dashboard`} className="text-sm text-white/50 transition-colors hover:text-white">Financial Dashboard</Link>
+              </li>
+              <li>
+                <Link href={`/${locale}/tools/articles`} className="text-sm text-white/50 transition-colors hover:text-white">Tax Guides &amp; Articles</Link>
+              </li>
+              <li>
+                <Link href={`/${locale}/cra-authorization`} className="text-sm text-white/50 transition-colors hover:text-white">Add Us as CRA Rep</Link>
+              </li>
             </ul>
           </div>
 
