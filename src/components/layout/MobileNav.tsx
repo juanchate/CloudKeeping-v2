@@ -22,9 +22,17 @@ export function MobileNav({ isOpen, onClose, dict, locale }: MobileNavProps) {
   const pathname = usePathname();
 
   const navItems = navKeys.map((key) => ({
+    key,
     label: dict.nav[key],
     href: `/${locale}${NAV_HREFS[key === "contact" ? "contact" : key]}`,
   }));
+
+  const resourceLinks = [
+    { label: dict.footer.resourcesTools, href: `/${locale}/tools` },
+    { label: dict.footer.resourcesDashboard, href: `/${locale}/tools/dashboard` },
+    { label: dict.footer.resourcesArticles, href: `/${locale}/tools/articles` },
+    { label: dict.footer.resourcesCRA, href: `/${locale}/cra-authorization` },
+  ];
 
   return (
     <>
@@ -56,21 +64,61 @@ export function MobileNav({ isOpen, onClose, dict, locale }: MobileNavProps) {
         </div>
 
         <nav className="flex flex-col gap-0.5 px-4">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                "rounded-xl px-4 py-3 text-[15px] font-medium transition-colors",
-                pathname === item.href
-                  ? "text-foreground bg-surface-alt"
-                  : "text-muted hover:text-foreground hover:bg-surface"
-              )}
-              onClick={onClose}
-            >
-              {item.label}
-            </Link>
-          ))}
+          {navItems.map((item) => {
+            if (item.key === "tools") {
+              const toolsActive =
+                pathname.startsWith(`/${locale}/tools`) ||
+                pathname.startsWith(`/${locale}/cra-authorization`);
+              return (
+                <div key={item.href} className="flex flex-col">
+                  <Link
+                    href={item.href}
+                    className={cn(
+                      "rounded-xl px-4 py-3 text-[15px] font-medium transition-colors",
+                      toolsActive
+                        ? "text-foreground bg-surface-alt"
+                        : "text-muted hover:text-foreground hover:bg-surface"
+                    )}
+                    onClick={onClose}
+                  >
+                    {item.label}
+                  </Link>
+                  <div className="ml-4 mt-0.5 flex flex-col gap-0.5 border-l border-border/50 pl-3">
+                    {resourceLinks.map((link) => (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        className={cn(
+                          "rounded-lg px-3 py-2 text-sm transition-colors",
+                          pathname === link.href
+                            ? "text-foreground bg-surface-alt"
+                            : "text-muted hover:text-foreground hover:bg-surface"
+                        )}
+                        onClick={onClose}
+                      >
+                        {link.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              );
+            }
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  "rounded-xl px-4 py-3 text-[15px] font-medium transition-colors",
+                  pathname === item.href
+                    ? "text-foreground bg-surface-alt"
+                    : "text-muted hover:text-foreground hover:bg-surface"
+                )}
+                onClick={onClose}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
 
           <div className="mt-8 flex flex-col gap-3 border-t border-border/50 pt-8">
             <LinkButton

@@ -8,7 +8,7 @@ import { LinkButton } from "@/components/ui/LinkButton";
 import { Container } from "@/components/ui/Container";
 import { LanguageToggle } from "./LanguageToggle";
 import { MobileNav } from "./MobileNav";
-import { Menu } from "lucide-react";
+import { Menu, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Dictionary } from "@/lib/dictionaries";
 import type { Locale } from "@/lib/i18n";
@@ -19,6 +19,15 @@ interface HeaderProps {
 }
 
 const navKeys = ["home", "services", "tools", "about", "faq"] as const;
+
+function buildResourceLinks(dict: Dictionary, locale: Locale) {
+  return [
+    { label: dict.footer.resourcesTools, href: `/${locale}/tools` },
+    { label: dict.footer.resourcesDashboard, href: `/${locale}/tools/dashboard` },
+    { label: dict.footer.resourcesArticles, href: `/${locale}/tools/articles` },
+    { label: dict.footer.resourcesCRA, href: `/${locale}/cra-authorization` },
+  ];
+}
 
 export function Header({ dict, locale }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -32,9 +41,14 @@ export function Header({ dict, locale }: HeaderProps) {
   }, []);
 
   const navItems = navKeys.map((key) => ({
+    key,
     label: dict.nav[key],
     href: `/${locale}${NAV_HREFS[key]}`,
   }));
+
+  const resourceLinks = buildResourceLinks(dict, locale);
+  const toolsPathActive =
+    pathname.startsWith(`/${locale}/tools`) || pathname.startsWith(`/${locale}/cra-authorization`);
 
   return (
     <header
@@ -62,20 +76,58 @@ export function Header({ dict, locale }: HeaderProps) {
 
           {/* Desktop Navigation — absolutely centered */}
           <div className="hidden lg:flex lg:items-center lg:gap-1 lg:absolute lg:left-1/2 lg:-translate-x-1/2">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={cn(
-                  "rounded-lg px-4 py-2 text-sm font-medium transition-colors",
-                  pathname === item.href
-                    ? "text-foreground bg-surface-alt"
-                    : "text-muted hover:text-foreground hover:bg-surface"
-                )}
-              >
-                {item.label}
-              </Link>
-            ))}
+            {navItems.map((item) => {
+              if (item.key === "tools") {
+                return (
+                  <div key={item.href} className="relative group">
+                    <Link
+                      href={item.href}
+                      className={cn(
+                        "inline-flex items-center gap-1 rounded-lg px-4 py-2 text-sm font-medium transition-colors",
+                        toolsPathActive
+                          ? "text-foreground bg-surface-alt"
+                          : "text-muted hover:text-foreground hover:bg-surface"
+                      )}
+                    >
+                      {item.label}
+                      <ChevronDown className="h-3.5 w-3.5 transition-transform duration-200 group-hover:rotate-180" />
+                    </Link>
+                    <div className="invisible absolute left-1/2 top-full z-50 -translate-x-1/2 pt-2 opacity-0 transition-all duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+                      <div className="min-w-60 rounded-xl border border-border/60 bg-white p-1.5 shadow-[0_10px_30px_rgba(0,0,0,0.08)]">
+                        {resourceLinks.map((link) => (
+                          <Link
+                            key={link.href}
+                            href={link.href}
+                            className={cn(
+                              "block rounded-lg px-3 py-2 text-sm transition-colors",
+                              pathname === link.href
+                                ? "bg-surface-alt text-foreground"
+                                : "text-muted hover:bg-surface hover:text-foreground"
+                            )}
+                          >
+                            {link.label}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                );
+              }
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={cn(
+                    "rounded-lg px-4 py-2 text-sm font-medium transition-colors",
+                    pathname === item.href
+                      ? "text-foreground bg-surface-alt"
+                      : "text-muted hover:text-foreground hover:bg-surface"
+                  )}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
           </div>
 
           {/* Desktop CTA + Lang toggle */}
