@@ -57,11 +57,11 @@ export default async function ServicesPage({ params }: Props) {
             {d.services.map((service) => (
               <Link key={service.slug} href={`/${locale}/services/${service.slug}`} className="group">
                 <Card hover className="h-full p-8 transition-all group-hover:border-accent/25">
-                  <div className="flex items-start gap-5">
+                  <div className="flex h-full items-start gap-5">
                     <div className="shrink-0 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-accent/8 text-accent transition-colors group-hover:bg-accent group-hover:text-white">
                       <Icon name={service.icon as IconName} className="h-6 w-6" />
                     </div>
-                    <div className="flex-1">
+                    <div className="flex flex-1 flex-col">
                       <h2 className="text-xl font-semibold tracking-tight text-foreground mb-2">{service.title}</h2>
                       <p className="text-muted leading-relaxed mb-4 text-sm">{service.shortDescription}</p>
                       <ul className="space-y-2 mb-5">
@@ -71,7 +71,7 @@ export default async function ServicesPage({ params }: Props) {
                           </li>
                         ))}
                       </ul>
-                      <span className="inline-flex items-center gap-1.5 text-sm font-medium text-accent transition-colors group-hover:text-accent-dark">
+                      <span className="mt-auto inline-flex items-center gap-1.5 text-sm font-medium text-accent transition-colors group-hover:text-accent-dark">
                         {d.servicesSection.learnMore}<ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
                       </span>
                     </div>

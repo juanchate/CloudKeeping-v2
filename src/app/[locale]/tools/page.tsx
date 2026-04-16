@@ -270,7 +270,7 @@ export default async function ToolsPage({ params }: Props) {
                   href={`/${locale}/tools/articles/${article.slug}`}
                   className="group"
                 >
-                  <Card hover className="h-full p-6 transition-all group-hover:border-accent/30">
+                  <Card hover className="flex h-full flex-col p-6 transition-all group-hover:border-accent/30">
                     <div className="mb-4 flex items-center justify-between">
                       <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/5 px-2.5 py-1 text-[11px] font-semibold text-primary">
                         {article.category}
@@ -280,7 +280,7 @@ export default async function ToolsPage({ params }: Props) {
                     <Icon className="mb-3 h-8 w-8 text-accent" />
                     <h3 className="text-lg font-semibold text-foreground">{article.title}</h3>
                     <p className="mt-2 text-sm text-muted leading-relaxed">{article.excerpt}</p>
-                    <div className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-accent group-hover:text-accent-dark">
+                    <div className="mt-auto inline-flex items-center gap-1.5 pt-5 text-sm font-medium text-accent group-hover:text-accent-dark">
                       {t.readArticle}
                       <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
                     </div>
@@ -421,13 +421,13 @@ export default async function ToolsPage({ params }: Props) {
                   href={`/${locale}/tools/calculators/${calc.slug}`}
                   className="group"
                 >
-                  <Card hover className="h-full p-6 transition-all group-hover:border-accent/30">
+                  <Card hover className="flex h-full flex-col p-6 transition-all group-hover:border-accent/30">
                     <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-accent/10 text-accent group-hover:bg-accent group-hover:text-white transition-colors">
                       <Icon className="h-5 w-5" />
                     </div>
                     <h3 className="mt-4 text-base font-semibold text-foreground">{calc.title}</h3>
                     <p className="mt-1 text-xs text-muted leading-relaxed">{calc.tagline}</p>
-                    <div className="mt-4 inline-flex items-center gap-1 text-xs font-medium text-accent group-hover:text-accent-dark">
+                    <div className="mt-auto inline-flex items-center gap-1 pt-4 text-xs font-medium text-accent group-hover:text-accent-dark">
                       {t.open}
                       <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
                     </div>

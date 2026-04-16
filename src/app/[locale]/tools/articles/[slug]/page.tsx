@@ -182,11 +182,11 @@ export default async function ArticlePage({ params }: Props) {
                 const RIcon = icons[r.icon] ?? BookOpen;
                 return (
                   <Link key={r.slug} href={`/${locale}/tools/articles/${r.slug}`} className="group">
-                    <Card hover className="h-full p-5 transition-all group-hover:border-accent/30">
+                    <Card hover className="flex h-full flex-col p-5 transition-all group-hover:border-accent/30">
                       <RIcon className="mb-2 h-6 w-6 text-accent" />
                       <h3 className="text-base font-semibold text-foreground">{r.title}</h3>
                       <p className="mt-1 text-xs text-muted">{r.excerpt}</p>
-                      <div className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-accent group-hover:text-accent-dark">
+                      <div className="mt-auto inline-flex items-center gap-1 pt-3 text-xs font-medium text-accent group-hover:text-accent-dark">
                         {t.read}
                         <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
                       </div>

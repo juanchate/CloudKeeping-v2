@@ -123,10 +123,10 @@ export default async function CalculatorPage({ params }: Props) {
             <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {related.map((r) => (
                 <Link key={r.slug} href={`/${locale}/tools/calculators/${r.slug}`} className="group">
-                  <Card hover className="h-full p-5 transition-all group-hover:border-accent/30">
+                  <Card hover className="flex h-full flex-col p-5 transition-all group-hover:border-accent/30">
                     <h3 className="text-base font-semibold text-foreground">{r.title}</h3>
                     <p className="mt-1 text-xs text-muted">{r.tagline}</p>
-                    <div className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-accent group-hover:text-accent-dark">
+                    <div className="mt-auto inline-flex items-center gap-1 pt-3 text-xs font-medium text-accent group-hover:text-accent-dark">
                       {t.open}
                       <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
                     </div>

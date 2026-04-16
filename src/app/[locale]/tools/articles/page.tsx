@@ -99,7 +99,7 @@ export default async function ArticlesPage({ params }: Props) {
                   href={`/${locale}/tools/articles/${article.slug}`}
                   className="group"
                 >
-                  <Card hover className="h-full p-6 transition-all group-hover:border-accent/30">
+                  <Card hover className="flex h-full flex-col p-6 transition-all group-hover:border-accent/30">
                     <div className="mb-4 flex items-center justify-between">
                       <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/5 px-2.5 py-1 text-[11px] font-semibold text-primary">
                         {article.category}
@@ -109,7 +109,7 @@ export default async function ArticlesPage({ params }: Props) {
                     <Icon className="mb-3 h-8 w-8 text-accent" />
                     <h3 className="text-lg font-semibold text-foreground">{article.title}</h3>
                     <p className="mt-2 text-sm text-muted leading-relaxed">{article.excerpt}</p>
-                    <div className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-accent group-hover:text-accent-dark">
+                    <div className="mt-auto inline-flex items-center gap-1.5 pt-5 text-sm font-medium text-accent group-hover:text-accent-dark">
                       {t.readArticle}
                       <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
                     </div>

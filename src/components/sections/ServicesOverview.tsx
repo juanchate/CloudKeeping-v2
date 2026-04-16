@@ -16,7 +16,7 @@ export function ServicesOverview({ content, services, locale }: Props) {
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
           {services.map((service) => (
             <Link key={service.slug} href={`/${locale}/services/${service.slug}`} className="group">
-              <Card hover className="h-full transition-all group-hover:border-accent/25">
+              <Card hover className="flex h-full flex-col transition-all group-hover:border-accent/25">
                 <CardHeader>
                   <div className="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-accent/8 text-accent transition-colors group-hover:bg-accent group-hover:text-white">
                     <Icon name={service.icon as IconName} className="h-5 w-5" />
@@ -24,7 +24,7 @@ export function ServicesOverview({ content, services, locale }: Props) {
                   <CardTitle>{service.title}</CardTitle>
                 </CardHeader>
                 <CardDescription>{service.shortDescription}</CardDescription>
-                <div className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-accent transition-colors group-hover:text-accent-dark">
+                <div className="mt-auto inline-flex items-center gap-1 pt-4 text-sm font-medium text-accent transition-colors group-hover:text-accent-dark">
                   {content.learnMore}<ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
                 </div>
               </Card>
